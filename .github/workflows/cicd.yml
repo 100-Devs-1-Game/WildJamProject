@@ -22,9 +22,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: Checkout LFS objects
-        run: git lfs pull
-
       - name: Git Diff Pre-Build
         run: |
           git status
