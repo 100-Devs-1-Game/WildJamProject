@@ -4,6 +4,7 @@ name: CI / CD
 
 env:
   GODOT_VERSION: 4.5.1
+
 # Whenever a tag push matching pattern "v*" then run the job
 on:
   push:
@@ -19,7 +20,7 @@ jobs:
   build-game:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Git Diff Pre-Build
@@ -27,7 +28,7 @@ jobs:
           git status
           git diff
 
-      - name: build game
+      - name: Build game
         id: build
         # Use latest version (see releases for all versions)
         uses: firebelley/godot-export@v5.2.1
@@ -44,31 +45,34 @@ jobs:
         run: |
           ./scripts/validate_git_diff.sh
 
-      - name: show build directory
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Debug - Show build outputs
         run: |
-          echo Build: ${{ steps.build.outputs.build_directory }}
-          FOLDER_PATH="${{ steps.build.outputs.build_directory }}"
-          if [ -d "$FOLDER_PATH" ]; then
-            ls -R "$FOLDER_PATH"
+          echo "=== Build Directory ==="
+          echo "Path: ${{ steps.build.outputs.build_directory }}"
+          if [ -d "${{ steps.build.outputs.build_directory }}" ]; then
+            ls -laR "${{ steps.build.outputs.build_directory }}"
           else
-            ls -R .
+            echo "Build directory does not exist!"
           fi
-
-      - name: show archive directory
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          echo Archive: ${{ steps.build.outputs.archive_directory }}
-          FOLDER_PATH="${{ steps.build.outputs.archive_directory }}"
-          if [ -d "$FOLDER_PATH" ]; then
-            ls -R "$FOLDER_PATH"
+          
+          echo ""
+          echo "=== Archive Directory ==="
+          echo "Path: ${{ steps.build.outputs.archive_directory }}"
+          if [ -d "${{ steps.build.outputs.archive_directory }}" ]; then
+            ls -laR "${{ steps.build.outputs.archive_directory }}"
           else
-            ls -R .
+            echo "Archive directory does not exist!"
           fi
+          
+          echo ""
+          echo "=== All ZIP files in workspace ==="
+          find . -name "*.zip" -type f 2>/dev/null || echo "No zip files found"
 
       - name: Test release build size for itch.io
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           python3 ./scripts/test_release_size.py ${{ steps.build.outputs.build_directory }}/web_release
+
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
@@ -77,6 +81,7 @@ jobs:
           path: ${{ steps.build.outputs.archive_directory }}/**/windows.zip
           retention-days: 1
           compression-level: 0
+          if-no-files-found: error
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4
@@ -86,7 +91,9 @@ jobs:
           path: ${{ steps.build.outputs.archive_directory }}/**/linux_release.zip
           retention-days: 1
           compression-level: 0
-      - name: create release
+          if-no-files-found: error
+
+      - name: Create release
         if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
@@ -113,8 +120,11 @@ jobs:
   test-linux-build:
     needs: build-game
     runs-on: ubuntu-latest
-    if:  ${{ !startsWith(github.ref, 'refs/tags/') }}
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
     steps:
+      - name: Checkout (for scripts if needed)
+        uses: actions/checkout@v4
+
       - name: Download Linux artifact
         uses: actions/download-artifact@v4
         with:
@@ -123,19 +133,46 @@ jobs:
 
       - name: Show artifact directory
         run: |
-          echo Archive: ./linux-build
-          FOLDER_PATH="./linux-build"
-          if [ -d "$FOLDER_PATH" ]; then
-            ls -R "$FOLDER_PATH"
-          else
-            ls -R .
-          fi
+          echo "=== Downloaded Artifact Contents ==="
+          echo "Path: ./linux-build"
+          ls -laR ./linux-build
 
       - name: Unzip artifact
         run: |
-          mkdir ./test_game
-          unzip "$(find ./linux-build -name linux_release.zip)" -d ./test_game
-          chmod +x ./test_game/*
+          mkdir -p ./test_game
+          
+          # Find the zip file (handles nested paths)
+          ZIP_FILE=$(find ./linux-build -name "linux_release.zip" -o -name "*.zip" | head -n 1)
+          
+          if [ -z "$ZIP_FILE" ]; then
+            echo "ERROR: No zip file found in artifact!"
+            exit 1
+          fi
+          
+          echo "Unzipping: $ZIP_FILE"
+          unzip "$ZIP_FILE" -d ./test_game
+          
+          # Make executable
+          chmod +x ./test_game/* 2>/dev/null || true
+          
+          echo "=== Test game directory ==="
+          ls -la ./test_game
+
+      - name: Find executable
+        id: find_exe
+        run: |
+          # Try to find the executable
+          EXECUTABLE=$(find ./test_game -type f -executable -name "*.x86_64" | head -n 1)
+          
+          if [ -z "$EXECUTABLE" ]; then
+            echo "ERROR: No executable found!"
+            echo "Contents of test_game:"
+            ls -laR ./test_game
+            exit 1
+          fi
+          
+          echo "Found executable: $EXECUTABLE"
+          echo "executable=$EXECUTABLE" >> $GITHUB_OUTPUT
 
       - name: Run tests
         run: |
@@ -143,7 +180,10 @@ jobs:
           set -o pipefail
 
           TEMP_FILE=/tmp/test_linux_release.log
-          ./test_game/linux_release.x86_64 --headless --render-thread safe --single-threaded-scene --verbose --quit-after 1000 2>&1 | tee $TEMP_FILE
+          EXECUTABLE="${{ steps.find_exe.outputs.executable }}"
+          
+          echo "Running: $EXECUTABLE"
+          $EXECUTABLE --headless --render-thread safe --single-threaded-scene --verbose --quit-after 1000 2>&1 | tee $TEMP_FILE
 
           echo ""
           echo ""
@@ -158,27 +198,27 @@ jobs:
 
           # Check for any error lines (case-insensitive)
           # Ignores null time for textures: https://github.com/godotengine/godot/issues/108994
-          FILTERED_ERRORS=$(grep "ERROR" "$TEMP_FILE" | grep -v 'ERROR: Parameter "t" is null.') || true
+          FILTERED_ERRORS=$(grep "ERROR" "$TEMP_FILE" | grep -v 'ERROR: Parameter "t" is null.' || true)
 
           if [ -n "$FILTERED_ERRORS" ]; then
-            echo "CI FAILED BECAUSE OF THESE GODOT ERRORS"
+            echo "❌ CI FAILED BECAUSE OF THESE GODOT ERRORS"
             echo "$FILTERED_ERRORS"
             echo ""
             FAILED=1
           fi
 
           # Check for invalid UID warnings which will cause problems for other people
-          FILTERED_WARNINGS=$(grep "WARNING" "$TEMP_FILE" | grep 'invalid UID:') || true
+          FILTERED_WARNINGS=$(grep "WARNING" "$TEMP_FILE" | grep 'invalid UID:' || true)
 
           if [ -n "$FILTERED_WARNINGS" ]; then
-            echo "CI FAILED BECAUSE OF THESE GODOT WARNINGS"
+            echo "❌ CI FAILED BECAUSE OF THESE GODOT WARNINGS"
             echo "$FILTERED_WARNINGS"
             echo ""
             FAILED=1
           fi
 
           if [ "$FAILED" -eq 0 ]; then
-            echo "ALL GOOD :) :) :)"
+            echo "✅ ALL GOOD :) :) :)"
             echo ""
             echo ""
             echo ""
@@ -187,3 +227,11 @@ jobs:
           fi
 
           exit $FAILED
+
+      - name: Upload test logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: /tmp/test_linux_release.log
+          retention-days: 7
