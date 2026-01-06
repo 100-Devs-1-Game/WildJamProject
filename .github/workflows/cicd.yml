@@ -42,6 +42,7 @@ jobs:
 
       - name: Validate Git Diff
         run: |
+          chmod +x ./scripts/validate_git_diff.sh
           ./scripts/validate_git_diff.sh
 
       - name: show build directory
