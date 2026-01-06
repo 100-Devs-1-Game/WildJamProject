@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Get list of modified/staged/deleted files, ignoring untracsked (??) and ignored (!!)
+# Get list of modified/staged/deleted files, ignoring untracsked (??) and ignored (!!) 
 modified_files=$(git status --porcelain | grep -Ev '^\?\? |^!! ' || true)
 
 echo "#####################"
