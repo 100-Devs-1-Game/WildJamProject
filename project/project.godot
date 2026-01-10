@@ -15,6 +15,20 @@ run/main_scene="uid://dmvxv8q01ju74"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://c4m7s1ueapiwu"
+
+[autoload]
+
+SoundPlayer="*res://autoloads/sound_player.gd"
+Debug="*res://autoloads/debug.gd"
+Signals="*res://autoloads/signals.gd"
+SceneManager="*res://autoloads/scene_manager.gd"
+MusicPlayer="*res://autoloads/music_player.gd"
+Achievements="*res://autoloads/achievements.gd"
+Settings="*res://autoloads/settings.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -23,7 +37,19 @@ window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/version_check/plugin.cfg")
+
+[physics]
+
+common/physics_interpolation=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[version_check]
+
+required_version="4.5.1"
