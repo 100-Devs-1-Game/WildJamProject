@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AchievementsList" load_steps=6 format=3 uid="uid://b1q2s7cnxmpqr"]
+
+[ext_resource type="Script" uid="uid://cv51ljpihrawj" path="res://modules/achievements/achievement_data.gd" id="1_cu7ny"]
+[ext_resource type="Resource" uid="uid://blcc368pxo7rh" path="res://resources/achievements/first_death.tres" id="2_nvtnj"]
+[ext_resource type="Script" uid="uid://bthb7q24a6c6f" path="res://modules/achievements/achievements_list.gd" id="3_gjc4u"]
+[ext_resource type="Texture2D" uid="uid://dd54mqj8v37at" path="res://icon.svg" id="3_t76xs"]
+
+[sub_resource type="Resource" id="Resource_dxnh7"]
+script = ExtResource("1_cu7ny")
+name = "First Win"
+icon = ExtResource("3_t76xs")
+flavor = "You won! Now do it again!"
+metadata/_custom_type_script = "uid://cv51ljpihrawj"
+
+[resource]
+script = ExtResource("3_gjc4u")
+list = Dictionary[ExtResource("1_cu7ny"), bool]({
+ExtResource("2_nvtnj"): false,
+SubResource("Resource_dxnh7"): false
+})
+metadata/_custom_type_script = "uid://bthb7q24a6c6f"

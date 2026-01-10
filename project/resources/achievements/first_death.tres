@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AchievementData" load_steps=3 format=3 uid="uid://blcc368pxo7rh"]
+
+[ext_resource type="Texture2D" uid="uid://dd54mqj8v37at" path="res://icon.svg" id="1_gralf"]
+[ext_resource type="Script" uid="uid://cv51ljpihrawj" path="res://modules/achievements/achievement_data.gd" id="1_nq8yi"]
+
+[resource]
+script = ExtResource("1_nq8yi")
+name = "You Died"
+icon = ExtResource("1_gralf")
+flavor = "Congratulations on having more than one life!"
+metadata/_custom_type_script = "uid://cv51ljpihrawj"
