@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://h2lk2e0pam0g"]
+[gd_scene load_steps=5 format=3 uid="uid://h2lk2e0pam0g"]
 
-[node name="Player" type="Node2D"]
+[ext_resource type="Script" uid="uid://b18ysuseie2dw" path="res://modules/player/player.gd" id="1_hqo1x"]
+[ext_resource type="Texture2D" uid="uid://c675onbpmqand" path="res://assets_external/placeholders/basic-topdown/TX Player.png" id="2_qgxqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7q0d"]
+atlas = ExtResource("2_qgxqk")
+region = Rect2(6, 14, 21, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgxqk"]
+size = Vector2(38, 41)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_hqo1x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_m7q0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 21.5)
+shape = SubResource("RectangleShape2D_qgxqk")
