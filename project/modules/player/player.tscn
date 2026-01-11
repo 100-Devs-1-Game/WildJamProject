@@ -14,6 +14,7 @@ height = 42.0
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_hqo1x")
+friction = 10000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -38)
