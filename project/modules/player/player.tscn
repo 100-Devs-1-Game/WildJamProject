@@ -7,8 +7,9 @@
 atlas = ExtResource("2_qgxqk")
 region = Rect2(6, 14, 21, 44)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgxqk"]
-size = Vector2(38, 8)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qgxqk"]
+radius = 5.0
+height = 42.0
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -20,4 +21,5 @@ scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_m7q0d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qgxqk")
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_qgxqk")
