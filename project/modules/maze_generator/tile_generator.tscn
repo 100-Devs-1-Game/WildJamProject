@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhfr42ov5a3lw"]
+
+[ext_resource type="Script" uid="uid://by3khmpvi64qc" path="res://modules/maze_generator/tile_generator.gd" id="1_bqavf"]
+
+[node name="tile_generator" type="Node2D"]
+script = ExtResource("1_bqavf")
+num_col = null
+num_row = null
+min_tile_percent = null
+min_tile_total = null
