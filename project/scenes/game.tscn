@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1st86pxs1fwe"]
+
+[ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_80nbo"]
+
+[node name="Game" type="Node"]
+
+[node name="DebugSceneChangeButton" parent="." instance=ExtResource("1_80nbo")]
+offset_left = 5.0
+offset_top = 6.0
+offset_right = -1745.0
+offset_bottom = -1026.0
+text = "Return to Skyscraper"
+targetScene = 1

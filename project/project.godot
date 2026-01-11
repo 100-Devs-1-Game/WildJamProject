@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Wild Jam Project"
-run/main_scene="uid://dmvxv8q01ju74"
+run/main_scene="uid://bbpmb0xyeg17o"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -24,7 +24,7 @@ buses/default_bus_layout="uid://c4m7s1ueapiwu"
 SoundPlayer="*res://autoloads/sound_player.gd"
 Debug="*res://autoloads/debug.gd"
 Signals="*res://autoloads/signals.gd"
-SceneManager="*res://autoloads/scene_manager.gd"
+SceneManager="*res://autoloads/scene_manager.tscn"
 MusicPlayer="*res://autoloads/music_player.gd"
 Achievements="*res://autoloads/achievements.gd"
 Settings="*res://autoloads/settings.gd"

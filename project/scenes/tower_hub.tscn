@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkoc5mebfrp4f"]
+
+[ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_pdoo8"]
+
+[node name="TowerHub" type="Node"]
+
+[node name="DebugSceneChangeButton" parent="." instance=ExtResource("1_pdoo8")]
+offset_right = -1792.0
+offset_bottom = -1032.0
+text = "Go To Level"
+targetScene = 2
