@@ -4,9 +4,9 @@ extends Node
 var current_scene: Node = null
 
 ## --- export vars ---
-@export var main_menu_scene: Resource
-@export var hub_scene: Resource
-@export var game_scene: Resource
+@export var main_menu_scene: PackedScene
+@export var hub_scene: PackedScene
+@export var game_scene: PackedScene
 
 ## --- default methods ---
 
@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 ## --- public methods ---
 
 ## Changes the room
-func change_room(scene: Resource) -> void:
+func change_room(scene: PackedScene) -> void:
 	# Remove current room
 	if current_scene and is_instance_valid(current_scene):
 		current_scene.queue_free()
