@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://c1st86pxs1fwe"]
+[gd_scene load_steps=7 format=4 uid="uid://c1st86pxs1fwe"]
 
 [ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://c14q0o1rmo0t5" path="res://assets/placeholder/Tiles.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://5x8rvcysrjvn" path="res://modules/enemies/proto_enemy.tscn" id="4_lbhrr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -395,3 +396,6 @@ tile_map_data = PackedByteArray("AADE/yEAAAALAAQAAADF/yEAAAAMAAQAAADG/yEAAAANAAQ
 tile_set = SubResource("TileSet_lbhrr")
 
 [node name="Player" parent="." instance=ExtResource("3_lnu2h")]
+
+[node name="ProtoEnemy" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(-655, 0)
