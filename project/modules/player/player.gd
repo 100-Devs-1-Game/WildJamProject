@@ -13,9 +13,9 @@ extends CharacterBody2D
 @export var friction: float = 3000.0 
 
 func _physics_process(delta: float) -> void:
-	var input_vector = Input.get_vector("MOVEMENT_LEFT", "MOVEMENT_RIGHT", "MOVEMENT_UP", "MOVEMENT_DOWN")
+	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
 	var current_max_speed = walk_speed
-	if Input.is_action_pressed("MOVEMENT_SPRINT"):
+	if Input.is_action_pressed("movement_sprint"):
 		current_max_speed = sprint_speed
 	
 	# uses move_toward for smooth movement
