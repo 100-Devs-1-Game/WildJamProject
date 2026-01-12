@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AchievementData" load_steps=3 format=3 uid="uid://bipqi5ne434q3"]
+
+[ext_resource type="Texture2D" uid="uid://b7vf0ukyffibc" path="res://assets/PROXY_firstwin.png" id="1_aootx"]
+[ext_resource type="Script" uid="uid://cv51ljpihrawj" path="res://modules/achievements/achievement_data.gd" id="2_00wxv"]
+
+[resource]
+script = ExtResource("2_00wxv")
+achievement_name = "First Win"
+achievement_image = ExtResource("1_aootx")
+achievement_description = "Here is the description of the achievement."
+metadata/_custom_type_script = "uid://cv51ljpihrawj"

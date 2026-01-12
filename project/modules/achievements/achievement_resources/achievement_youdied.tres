@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AchievementData" load_steps=3 format=3 uid="uid://68er7iy4465a"]
+
+[ext_resource type="Texture2D" uid="uid://cw87nga7ye15d" path="res://assets/PROXY_youdied.png" id="1_6hbgj"]
+[ext_resource type="Script" uid="uid://cv51ljpihrawj" path="res://modules/achievements/achievement_data.gd" id="1_8f8nx"]
+
+[resource]
+script = ExtResource("1_8f8nx")
+achievement_name = "You died"
+achievement_image = ExtResource("1_6hbgj")
+achievement_description = "Here is the description of the achievement."
+metadata/_custom_type_script = "uid://cv51ljpihrawj"
