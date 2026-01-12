@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfm4uxsau6esv"]
+
+[ext_resource type="Script" uid="uid://dxhkr3jriattp" path="res://modules/achievements/achievement_ui.gd" id="1_crw1h"]
+
+[node name="AchievementUI" type="Control" node_paths=PackedStringArray("achievements_list")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_crw1h")
+achievements_list = NodePath("VBoxContainer")
+achievement_show_time = 6.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 431.0
+offset_bottom = 132.0

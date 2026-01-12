@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://dya6nleusn8t5"]
+
+[ext_resource type="Script" uid="uid://bn38vcu8atg35" path="res://modules/achievements/debug_achievements.gd" id="1_xwp2o"]
+[ext_resource type="Script" uid="uid://cv51ljpihrawj" path="res://modules/achievements/achievement_data.gd" id="2_6jpp3"]
+[ext_resource type="PackedScene" uid="uid://cfm4uxsau6esv" path="res://modules/achievements/achievement_ui.tscn" id="2_053ps"]
+[ext_resource type="Resource" uid="uid://bipqi5ne434q3" path="res://modules/achievements/achievement_resources/achievement_firstwin.tres" id="3_h7teu"]
+[ext_resource type="Resource" uid="uid://68er7iy4465a" path="res://modules/achievements/achievement_resources/achievement_youdied.tres" id="4_h7teu"]
+
+[node name="DebugAchievements" type="Node2D"]
+script = ExtResource("1_xwp2o")
+debug_achs = Array[ExtResource("2_6jpp3")]([ExtResource("3_h7teu"), ExtResource("4_h7teu"), ExtResource("4_h7teu")])
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="AchievementUI" parent="." instance=ExtResource("2_053ps")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
