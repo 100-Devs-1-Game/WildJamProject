@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-# visual settings
-@export var default_scale: float = -1.0
-
 # health
 @export var max_health := 100
 var health := max_health
@@ -173,7 +170,7 @@ func ranged_movement(distance):
 		move_away_from(player.global_position)
 	else:
 		velocity = Vector2.ZERO
-		try_ranged_attack()
+	try_ranged_attack()
 		
 # Attack sequence
 func try_attack():

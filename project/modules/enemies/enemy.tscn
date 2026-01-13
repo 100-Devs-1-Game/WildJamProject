@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cpvypcfg16dmn" path="res://assets/placeholder_enemy/walk/PlaceholderWalk0002.png" id="10_hnp7r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d4agv"]
-radius = 1000.0
+radius = 1072.1194
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8l286"]
 radius = 45.0
