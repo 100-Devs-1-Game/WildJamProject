@@ -222,8 +222,8 @@ func move_away_from(target: Vector2):
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	var hurt_player = area.get_parent()
-	if hurt_player and player.is_in_group("player"):
-		player.take_damage(attack_damage)
+	if hurt_player and hurt_player.is_in_group("player"):
+		hurt_player.take_damage(attack_damage)
 
 func enable_hitbox():
 	hitbox.monitoring = true
