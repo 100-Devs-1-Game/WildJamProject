@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://h2lk2e0pam0g"]
+[gd_scene load_steps=6 format=3 uid="uid://h2lk2e0pam0g"]
 
 [ext_resource type="Script" uid="uid://b18ysuseie2dw" path="res://modules/player/player.gd" id="1_hqo1x"]
+[ext_resource type="PackedScene" uid="uid://tt37bu0jl5sw" path="res://modules/player/bullet.tscn" id="2_m7q0d"]
 [ext_resource type="Texture2D" uid="uid://c675onbpmqand" path="res://assets_external/placeholders/basic-topdown/TX Player.png" id="2_qgxqk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7q0d"]
@@ -15,6 +16,7 @@ height = 42.0
 y_sort_enabled = true
 script = ExtResource("1_hqo1x")
 friction = 10000.0
+bullet_scene = ExtResource("2_m7q0d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -38)
@@ -24,3 +26,7 @@ texture = SubResource("AtlasTexture_m7q0d")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qgxqk")
+
+[node name="BulletTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
