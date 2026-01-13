@@ -1,3 +1,4 @@
+class_name IsometricPlayer
 extends CharacterBody2D
 
 @export_group("Movement Settings")
@@ -39,6 +40,8 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
+	# Since this is an isometric perspective, reduce vertical movement, assuming a 45 degree camera, the movement is halved
+	input_vector.y *= 0.5
 	var current_max_speed = walk_speed
 	if Input.is_action_pressed("movement_sprint"):
 		current_max_speed = sprint_speed
@@ -94,3 +97,7 @@ func get_nearest_enemy_from_aim(check_dir: Vector2) -> Node2D:
 				nearest_enemy = enemy
 				
 	return nearest_enemy
+
+func pickup_item(item: ItemInstance):
+	prints("The player picked up the item with ID:", item.item_id)
+	# TODO apply item properties to the player or add it to their inventory
