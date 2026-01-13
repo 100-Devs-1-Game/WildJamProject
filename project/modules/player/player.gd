@@ -22,12 +22,20 @@ extends CharacterBody2D
 @export var shoot_rate: float = 1
 
 @onready var bullet_timer: Timer = $BulletTimer
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var model: Node2D = $Model
+# the model assets are tiny, it'll be scaled up by default
+@onready var model_scale: float = model.scale.x
+@onready var shoulder: Node2D = %Shoulder
+
 
 func _ready() -> void:
 	bullet_timer.start(shoot_rate)
 
-func _process(delta: float) -> void:
-	pass
+func _process(_delta: float) -> void:
+	var looking_right := global_position.x < get_global_mouse_position().x
+	model.scale.x = model_scale if looking_right else -model_scale 
+	shoulder.look_at(get_global_mouse_position())
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
@@ -46,6 +54,12 @@ func _physics_process(delta: float) -> void:
 	aim_dir = Vector2.RIGHT if mouse_dir.x >= 0 else Vector2.LEFT
 	
 	move_and_slide()
+	
+	if velocity.length() < 1:
+		animation_player.play("RESET")
+	else:
+		if not animation_player.is_playing():
+			animation_player.play("walk")
 
 func _on_bullet_timer_timeout() -> void:
 	# Autoaim to nearest enemy
