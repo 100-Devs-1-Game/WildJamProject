@@ -12,6 +12,23 @@ extends CharacterBody2D
 # speed to deaccelerate (if we want to add different terrain modifiers in the future - decreasse it for ice, for exaple)
 @export var friction: float = 3000.0 
 
+# bullet scene
+@export var bullet_scene: PackedScene = null
+
+# aiming angle
+@export var aim_dir: Vector2 = Vector2.RIGHT
+
+# rate of firing bullets
+@export var shoot_rate: float = 1
+
+@onready var bullet_timer: Timer = $BulletTimer
+
+func _ready() -> void:
+	bullet_timer.start(shoot_rate)
+
+func _process(delta: float) -> void:
+	pass
+
 func _physics_process(delta: float) -> void:
 	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
 	var current_max_speed = walk_speed
@@ -23,5 +40,43 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(input_vector * current_max_speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		
+	# assign aim dir based on mouse position
+	var mouse_dir = global_position.direction_to(get_global_mouse_position())
+	aim_dir = Vector2.RIGHT if mouse_dir.x >= 0 else Vector2.LEFT
 	
 	move_and_slide()
+
+func _on_bullet_timer_timeout() -> void:
+	# Autoaim to nearest enemy
+	var enemy = get_nearest_enemy_from_aim(aim_dir)
+	
+	# Create bullets in aim_dir
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = global_position
+	if (enemy != null):
+		bullet.rotation = (enemy.global_position - bullet.global_position).angle()
+	else:
+		bullet.rotation = aim_dir.angle()
+	get_parent().add_child(bullet)
+
+# Get nearest enemy based on aim vector
+func get_nearest_enemy_from_aim(check_dir: Vector2) -> Node2D:
+	var nearest_enemy = null
+	var shortest_dist = INF
+	
+	# Find closest object in enemies group
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		# Get difference
+		var to_enemy = enemy.global_position - global_position
+		
+		# Check if enemy is on the same side as the snapped_vector
+		if check_dir.dot(to_enemy) > 0:
+			# Check if closest
+			var dist = to_enemy.length()
+			if dist < shortest_dist:
+				shortest_dist = dist
+				nearest_enemy = enemy
+				
+	return nearest_enemy

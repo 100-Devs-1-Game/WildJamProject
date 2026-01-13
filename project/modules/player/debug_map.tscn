@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bij2gt0m1r71w"]
+[gd_scene load_steps=22 format=4 uid="uid://bij2gt0m1r71w"]
 
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="1_5ydlk"]
 [ext_resource type="Texture2D" uid="uid://m335mn7k50ir" path="res://assets_external/placeholders/basic-topdown/TX Tileset Grass.png" id="2_ud308"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dl8gj7cr508y2" path="res://assets_external/placeholders/basic-topdown/TX Shadow.png" id="8_8rxff"]
 [ext_resource type="Texture2D" uid="uid://6pxn481uvxgq" path="res://assets_external/placeholders/basic-topdown/TX Struct.png" id="9_irdpc"]
 [ext_resource type="Texture2D" uid="uid://d2tqsnern3bxe" path="res://assets_external/placeholders/basic-topdown/TX Tileset Wall.png" id="10_kgu46"]
+[ext_resource type="PackedScene" uid="uid://833q7u8hgfk5" path="res://modules/enemies/enemy.tscn" id="11_ud308"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fwl07"]
 texture = ExtResource("2_ud308")
@@ -2181,5 +2182,7 @@ tile_map_data = PackedByteArray("AAAbAAoABAAOAAgAAAAbAAsABAAOAAkAAAAiAAoABAAOAAg
 tile_set = SubResource("TileSet_bnrm7")
 
 [node name="Player" parent="." instance=ExtResource("1_5ydlk")]
-y_sort_enabled = true
 position = Vector2(467, 554)
+
+[node name="Enemy" parent="." instance=ExtResource("11_ud308")]
+position = Vector2(266, 460)
