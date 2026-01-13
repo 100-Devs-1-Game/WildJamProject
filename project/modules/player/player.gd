@@ -30,6 +30,11 @@ extends CharacterBody2D
 @onready var shoulder: Node2D = %Shoulder
 
 
+# health
+@export var max_health := 100
+var health := max_health
+var invincible := false
+
 func _ready() -> void:
 	bullet_timer.start(shoot_rate)
 
@@ -107,3 +112,22 @@ func pickup_item(item: ItemInstance):
 		player_item_inventory[item.item_id] += 1
 	else:
 		player_item_inventory[item.item_id] = 1
+# Take damage
+func take_damage(amount: int):
+	if invincible:
+		return
+	
+	health -= amount
+	health = max(health, 0)
+	
+	if health <= 0:
+		# TODO handle lose
+		queue_free()
+	else:
+		start_iframes()
+
+# Toggle iframes
+func start_iframes():
+	invincible = true
+	await get_tree().create_timer(0.5).timeout
+	invincible = false

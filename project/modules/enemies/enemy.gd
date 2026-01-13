@@ -1,19 +1,31 @@
 extends CharacterBody2D
 
+# visual settings
+@export var default_scale: float = -1.0
+
 # Wander settings
 @export var move_speed := 150.0
 @export var wander_radius := 120.0
 @export var wander_interval := 2.5
 
 # chase settings
-@export var melee_range := 24.0
+@export var melee_range := 64.0
 @export var ranged_min_range := 300.0
 @export var ranged_max_range := 600.0
 
-@export var is_ranged := true
+# attack settings
+@export var attack_damage := 20
+@export var attack_cooldown := 1.2
+@export var attack_frame := 3
+
+var can_attack := true
+var is_attacking := false
+
+@export var is_ranged := false
 
 # Internal
 var player: Node2D = null
+var prev_pos: Vector2
 var spawn_position: Vector2
 var wander_target: Vector2
 var wander_timer := 0.0
@@ -26,10 +38,15 @@ enum State {
 
 var state := State.WANDER
 
+# onready
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hitbox: Area2D = $Hitbox
+
 ## --- built in methods ---
 
 func _ready():
 	spawn_position = global_position
+	prev_pos = global_position
 	pick_new_wander_target()
 	
 func _physics_process(delta):
@@ -39,8 +56,17 @@ func _physics_process(delta):
 			wander_behavior(delta)
 		State.CHASE:
 			chase_behavior(delta)
-
+	
 	move_and_slide()
+	update_animation()
+	
+	## Update scale (don't update if velocity equals 0)
+	if velocity.x < 0:
+		animated_sprite.flip_h = true
+		hitbox.position.x = -abs(hitbox.position.x)
+	elif velocity.x > 0:
+		animated_sprite.flip_h = false
+		hitbox.position.x = abs(hitbox.position.x)
 
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	# Start chasing player
@@ -54,8 +80,30 @@ func _on_detection_range_body_exited(body: Node2D) -> void:
 	if body == player:
 		player = null
 		state = State.WANDER
+		
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if animated_sprite.animation == "attack" and animated_sprite.frame == attack_frame:
+		enable_hitbox()
+	else:
+		disable_hitbox()
+		
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite.animation == "attack":
+		is_attacking = false
+		await get_tree().create_timer(attack_cooldown).timeout
+		can_attack = true
 
 ## --- public methods ---
+
+# Change animation
+func update_animation():
+	if is_attacking:
+		return
+	
+	if velocity.length() > 1:
+		animated_sprite.play("walk")
+	else:
+		animated_sprite.play("idle")
 
 # Gets a random local point tow ander to
 func pick_new_wander_target():
@@ -89,12 +137,17 @@ func chase_behavior(delta):
 
 # Melee behavior
 func melee_movement(distance):
+	# Check if doing attack animation
+	if is_attacking:
+		velocity = Vector2.ZERO
+		return
+	
 	# Move towards player and attack
 	if distance > melee_range:
 		move_towards(player.global_position)
 	else:
 		velocity = Vector2.ZERO
-		# TODO attack aith anim
+		try_attack()
 
 # Ranged behavior
 func ranged_movement(distance):
@@ -106,6 +159,18 @@ func ranged_movement(distance):
 	else:
 		velocity = Vector2.ZERO
 		# TODO launch projectiles
+		
+# Attack sequence
+func try_attack():
+	if not can_attack:
+		return
+	
+	# Set flags
+	is_attacking = true
+	can_attack = false
+	
+	# Play animation
+	animated_sprite.play("attack")
 
 ## --- movement methods ---
 # TODO change to use navmesh
@@ -115,3 +180,16 @@ func move_towards(target: Vector2):
 
 func move_away_from(target: Vector2):
 	velocity = (global_position - target).normalized() * move_speed
+
+## --- hitbox methods ---
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	var hurt_player = area.get_parent()
+	if hurt_player and player.is_in_group("player"):
+		player.take_damage(attack_damage)
+
+func enable_hitbox():
+	hitbox.monitoring = true
+
+func disable_hitbox():
+	hitbox.monitoring = false
