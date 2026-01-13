@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://6s5vq2qeopxv"]
 
 [ext_resource type="Script" uid="uid://cvmp0ryajvp3t" path="res://modules/hud/hud.gd" id="1_lqyyi"]
-[ext_resource type="PackedScene" uid="uid://bp0g5k1my0alh" path="res://modules/hud/weapon_hotbar.tscn" id="2_0vtu1"]
+[ext_resource type="PackedScene" path="res://modules/hud/weapon_hotbar.tscn" id="2_0vtu1"]
 
 [node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "sanity_bar", "ammo_count_label", "weapon_hotbar")]
 layout_mode = 3

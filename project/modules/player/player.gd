@@ -35,8 +35,19 @@ extends CharacterBody2D
 var health := max_health
 var invincible := false
 
+# ammo
+@export var max_ammo := 100
+var ammo := max_ammo
+
 func _ready() -> void:
 	bullet_timer.start(shoot_rate)
+	_post_ready.call_deferred() 
+	
+func _post_ready():
+	# ensure the HUD is fully loaded before setting the initial values
+	Signals.change_ammo_count_value.emit(ammo, max_ammo)
+	Signals.change_health_value.emit(health, max_health)
+	
 
 func _process(_delta: float) -> void:
 	var looking_right := global_position.x < get_global_mouse_position().x
@@ -70,6 +81,10 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("walk")
 
 func _on_bullet_timer_timeout() -> void:
+	if ammo <= 0:
+		return
+	ammo -= 1
+	
 	# Autoaim to nearest enemy
 	var enemy = get_nearest_enemy_from_aim(aim_dir)
 	
@@ -82,6 +97,8 @@ func _on_bullet_timer_timeout() -> void:
 		bullet.rotation = aim_dir.angle()
 	bullet.set_owner_player()
 	get_parent().add_child(bullet)
+	Signals.change_ammo_count_value.emit(ammo, max_ammo)
+
 
 # Get nearest enemy based on aim vector
 func get_nearest_enemy_from_aim(check_dir: Vector2) -> Node2D:
@@ -113,6 +130,7 @@ func pickup_item(item: ItemInstance):
 		player_item_inventory[item.item_id] += 1
 	else:
 		player_item_inventory[item.item_id] = 1
+	ammo += 100
 
 # Take damage
 func take_damage(amount: int):
@@ -121,12 +139,17 @@ func take_damage(amount: int):
 	
 	health -= amount
 	health = max(health, 0)
+	Signals.change_health_value.emit(health, max_health)
 	
 	if health <= 0:
 		# TODO handle lose
 		queue_free()
 	else:
 		start_iframes()
+		
+		
+		
+		
 
 # Toggle iframes
 func start_iframes():
