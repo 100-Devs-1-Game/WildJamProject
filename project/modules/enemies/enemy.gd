@@ -1,7 +1,9 @@
+class_name MazeEnemy
 extends CharacterBody2D
 
-# visual settings
-@export var default_scale: float = -1.0
+# health
+@export var max_health := 100
+var health := max_health
 
 # Wander settings
 @export var move_speed := 150.0
@@ -22,6 +24,8 @@ var can_attack := true
 var is_attacking := false
 
 @export var is_ranged := false
+
+@export var bullet_scene: PackedScene = null
 
 # Internal
 var player: Node2D = null
@@ -95,6 +99,15 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 ## --- public methods ---
 
+# Take damage
+func take_damage(amount: int):
+	health -= amount
+	health = max(health, 0)
+	
+	if health <= 0:
+		# TODO handle lose
+		queue_free()
+
 # Change animation
 func update_animation():
 	if is_attacking:
@@ -158,7 +171,7 @@ func ranged_movement(distance):
 		move_away_from(player.global_position)
 	else:
 		velocity = Vector2.ZERO
-		# TODO launch projectiles
+	try_ranged_attack()
 		
 # Attack sequence
 func try_attack():
@@ -171,6 +184,30 @@ func try_attack():
 	
 	# Play animation
 	animated_sprite.play("attack")
+	
+# Ranged attack sequence
+func try_ranged_attack():
+	if not can_attack:
+		return
+	
+	# Create bullet on timeout
+	can_attack = false
+	create_bullet()
+	await get_tree().create_timer(attack_cooldown).timeout
+	can_attack = true
+	
+func create_bullet() -> void:
+	# Autoaim to player
+	if (!player):
+		return
+	
+	# Create bullet
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = global_position
+	bullet.rotation = (Vector2(0, -32) + player.global_position - bullet.global_position).angle()
+	bullet.damage = attack_damage
+	bullet.set_owner_enemy()
+	get_parent().add_child(bullet)
 
 ## --- movement methods ---
 # TODO change to use navmesh
@@ -185,8 +222,8 @@ func move_away_from(target: Vector2):
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	var hurt_player = area.get_parent()
-	if hurt_player and player.is_in_group("player"):
-		player.take_damage(attack_damage)
+	if hurt_player and hurt_player.is_in_group("player"):
+		hurt_player.take_damage(attack_damage)
 
 func enable_hitbox():
 	hitbox.monitoring = true
