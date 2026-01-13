@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwqngw0f30fo5"]
+
+[ext_resource type="Script" uid="uid://d2f5dbup5yemg" path="res://modules/dialogue/dialogue_box.gd" id="1_vqr27"]
+[ext_resource type="Texture2D" uid="uid://d1ym7s03nbwyk" path="res://assets_external/placeholders/dialogue/robot-profile.png" id="2_dgfsd"]
+[ext_resource type="PackedScene" uid="uid://0o84ijttq5gq" path="res://modules/dialogue/components/template_option.tscn" id="2_lpkso"]
+
+[node name="DialogueBox" type="Panel"]
+visible = false
+offset_left = 60.0
+offset_top = 623.0
+offset_right = 1867.0
+offset_bottom = 1045.0
+script = ExtResource("1_vqr27")
+TemplateOption = ExtResource("2_lpkso")
+
+[node name="SpeakerName" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 311.0
+offset_top = 21.0
+offset_right = 1595.0
+offset_bottom = 78.0
+theme_override_font_sizes/normal_font_size = 36
+text = "Speaker"
+vertical_alignment = 1
+
+[node name="SpeakerImage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 38.0
+offset_right = 269.0
+offset_bottom = 264.0
+texture = ExtResource("2_dgfsd")
+
+[node name="LineText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 87.0
+offset_right = 1772.0
+offset_bottom = 221.0
+theme_override_font_sizes/normal_font_size = 28
+text = "This is a line. A very very very long line, spoken by someone wanting to say something really important. It should be shown on the screen and be responsive to different screen sizes and resolutions. This is an example text. This is a line. A very very very long line, spoken by someone wanting to say something really important. It should be shown on the screen and be responsive to different screen sizes and resolutions. This is an example text. This is a line. A very very very long line, spoken by someone wanting to say something really important. It should be shown on the screen and be responsive to different screen sizes and resolutions. This is an example text."
+
+[node name="LineOptions" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 305.0
+offset_top = 242.0
+offset_right = 1773.0
+offset_bottom = 340.0
+
+[node name="TemplateButton" parent="LineOptions" instance=ExtResource("2_lpkso")]
+layout_mode = 2
+
+[node name="NextLineButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1577.0
+offset_top = 356.0
+offset_right = 1773.0
+offset_bottom = 398.0
+theme_override_font_sizes/font_size = 24
+text = "NEXT"
