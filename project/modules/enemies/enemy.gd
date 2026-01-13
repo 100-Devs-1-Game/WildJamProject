@@ -1,3 +1,4 @@
+class_name MazeEnemy
 extends CharacterBody2D
 
 # health
