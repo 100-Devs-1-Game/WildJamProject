@@ -2188,4 +2188,4 @@ tile_set = SubResource("TileSet_bnrm7")
 position = Vector2(467, 554)
 
 [node name="Enemy" parent="." instance=ExtResource("11_ud308")]
-position = Vector2(266, 460)
+position = Vector2(1368, 507)

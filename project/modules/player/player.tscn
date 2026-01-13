@@ -88,7 +88,7 @@ _data = {
 &"walk": SubResource("Animation_8f7i2")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 script = ExtResource("1_hqo1x")
 friction = 10000.0
