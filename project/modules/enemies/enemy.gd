@@ -105,6 +105,7 @@ func take_damage(amount: int):
 	health = max(health, 0)
 	
 	if health <= 0:
+		Signals.enemy_destroyed.emit(self)
 		# TODO handle lose
 		queue_free()
 
@@ -136,7 +137,7 @@ func wander_behavior(delta):
 	move_towards(wander_target)
 
 # Behavior for chasing
-func chase_behavior(delta):
+func chase_behavior(_delta):
 	if not player:
 		state = State.WANDER
 		return
