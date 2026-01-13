@@ -2192,6 +2192,7 @@ position = Vector2(1368, 507)
 
 [node name="RangedEnemy" parent="." instance=ExtResource("11_ud308")]
 position = Vector2(1614, 506)
+scale = Vector2(0.8, 0.8)
 attack_damage = 10
 attack_cooldown = 1.0
 is_ranged = true
