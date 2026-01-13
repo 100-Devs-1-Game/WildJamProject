@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://chm57kei2t3e5"]
+
+[ext_resource type="Script" uid="uid://bh2hqowbl4c1s" path="res://modules/items/item_instance.gd" id="1_akx2o"]
+[ext_resource type="PackedScene" uid="uid://dyxivm3un4qhs" path="res://assets/3d/items/single/arm_01.tscn" id="1_qbqf5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_s4e2b"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Environment" id="Environment_akx2o"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[node name="ItemInstance" type="Node2D" node_paths=PackedStringArray("mesh_instance")]
+script = ExtResource("1_akx2o")
+mesh_instance = NodePath("SubViewport/ARM01")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_s4e2b")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.9523586, 0.30498067, 0, -0.30498067, 0.9523586, 0, 2.8470917, 7.5)
+environment = SubResource("Environment_akx2o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.94690204, 0.32152206, 0, -0.32152206, 0.94690204, 0, 6.1311836, 0)
+
+[node name="ARM01" parent="SubViewport" instance=ExtResource("1_qbqf5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34541366, 0)
