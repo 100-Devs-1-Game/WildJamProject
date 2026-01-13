@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://h2lk2e0pam0g"]
+[gd_scene load_steps=13 format=3 uid="uid://h2lk2e0pam0g"]
 
 [ext_resource type="Script" uid="uid://b18ysuseie2dw" path="res://modules/player/player.gd" id="1_hqo1x"]
 [ext_resource type="PackedScene" uid="uid://tt37bu0jl5sw" path="res://modules/player/bullet.tscn" id="2_m7q0d"]
 [ext_resource type="Texture2D" uid="uid://cj1finvotitst" path="res://assets/player_parts/Android_legs_sheet_15x12.png" id="3_5rkg0"]
+[ext_resource type="Texture2D" uid="uid://biybclni06xgd" path="res://assets/shadow.png" id="3_ej5i3"]
 [ext_resource type="Texture2D" uid="uid://bi1gxmmhaheeo" path="res://assets/player_parts/Android_torso_sheet_13x13.png" id="4_ej5i3"]
 [ext_resource type="Texture2D" uid="uid://cwpvv1q45m832" path="res://assets/player_parts/Android_arm_sheet_9x9.png" id="5_dhhsu"]
 [ext_resource type="Texture2D" uid="uid://dvwmonql22nba" path="res://assets/player_parts/Guns_sheet_24x12.png" id="6_0rblh"]
@@ -92,6 +93,12 @@ y_sort_enabled = true
 script = ExtResource("1_hqo1x")
 friction = 10000.0
 bullet_scene = ExtResource("2_m7q0d")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.3764706)
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("3_ej5i3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964

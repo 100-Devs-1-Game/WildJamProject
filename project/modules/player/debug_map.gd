@@ -19,7 +19,7 @@ func spawn_item(coords: Vector2i, item_id: int):
 	if not terrain:
 		return
 	var item := preload("res://modules/items/item_instance.tscn").instantiate() as ItemInstance
-	item.load_item(item_id)
+	item.load_item(item_id, coords, terrain)
 	add_child(item)
 	# Items are centered, we need to add half the cell size to center them on the selected tile
 	item.position = terrain.map_to_local(coords) + terrain.tile_set.tile_size * 0.5
