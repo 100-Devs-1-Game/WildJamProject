@@ -1,9 +1,51 @@
-[gd_scene format=3 uid="uid://6s5vq2qeopxv"]
+[gd_scene load_steps=3 format=3 uid="uid://6s5vq2qeopxv"]
 
-[node name="Hud" type="Control"]
+[ext_resource type="Script" uid="uid://cvmp0ryajvp3t" path="res://modules/hud/hud.gd" id="1_lqyyi"]
+[ext_resource type="PackedScene" uid="uid://bp0g5k1my0alh" path="res://modules/hud/weapon_hotbar.tscn" id="2_0vtu1"]
+
+[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "sanity_bar", "ammo_count_label", "weapon_hotbar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lqyyi")
+health_bar = NodePath("HealthBar")
+sanity_bar = NodePath("SanityBar")
+ammo_count_label = NodePath("AmmoCountLabel")
+weapon_hotbar = NodePath("WeaponHotbar")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 949.0
+offset_right = 1033.0
+offset_bottom = 976.0
+
+[node name="SanityBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 833.0
+offset_top = 996.0
+offset_right = 1032.0
+offset_bottom = 1023.0
+
+[node name="AmmoCountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1087.0
+offset_top = 976.0
+offset_right = 1130.0
+offset_bottom = 999.0
+text = "15/60"
+
+[node name="DebuggingTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="WeaponHotbar" parent="." instance=ExtResource("2_0vtu1")]
+layout_mode = 1
+offset_left = 244.0
+offset_top = 447.0
+offset_right = 244.0
+offset_bottom = 447.0
+
+[connection signal="timeout" from="DebuggingTimer" to="." method="_on_timer_timeout"]

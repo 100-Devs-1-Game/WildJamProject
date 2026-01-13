@@ -10,3 +10,9 @@ signal achievement_trigger(achievement: AchievementData)
 signal achievement_unlocked(thing: AchievementData)
 ## Emitted when an enemy is killed/destroyed
 signal enemy_destroyed(enemy: MazeEnemy)
+## Emitted when health value changes
+signal change_health_value(current_amount: float)
+## Emitted when sanity value changes
+signal change_sanity_value(current_amount: float)
+## Emitted when ammo count changes
+signal change_ammo_count_value(current_amount: int, max_amount: int)
