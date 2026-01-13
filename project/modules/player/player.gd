@@ -80,6 +80,7 @@ func _on_bullet_timer_timeout() -> void:
 		bullet.rotation = (enemy.global_position - bullet.global_position).angle()
 	else:
 		bullet.rotation = aim_dir.angle()
+	bullet.set_owner_player()
 	get_parent().add_child(bullet)
 
 # Get nearest enemy based on aim vector
@@ -112,6 +113,7 @@ func pickup_item(item: ItemInstance):
 		player_item_inventory[item.item_id] += 1
 	else:
 		player_item_inventory[item.item_id] = 1
+
 # Take damage
 func take_damage(amount: int):
 	if invincible:

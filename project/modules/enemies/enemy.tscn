@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cd82axkbb6h2v" path="res://modules/enemies/enemy.gd" id="1_b0ao0"]
 [ext_resource type="Texture2D" uid="uid://2bspddvpnnqn" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0000.png" id="2_2e5bj"]
+[ext_resource type="PackedScene" uid="uid://tt37bu0jl5sw" path="res://modules/player/bullet.tscn" id="2_vv1nm"]
 [ext_resource type="Texture2D" uid="uid://dlk87le4g1ikx" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0001.png" id="3_vv1nm"]
 [ext_resource type="Texture2D" uid="uid://bxhvghaxj7vqb" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0002.png" id="4_3mp3g"]
 [ext_resource type="Texture2D" uid="uid://uhwpyxk18cej" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0003.png" id="5_x63yf"]
@@ -70,12 +71,11 @@ animations = [{
 radius = 54.0
 height = 110.0
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_2e5bj"]
-
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_b0ao0")
+bullet_scene = ExtResource("2_vv1nm")
 
 [node name="DetectionRange" type="Area2D" parent="."]
 collision_layer = 0
@@ -88,8 +88,7 @@ shape = SubResource("CapsuleShape2D_8l286")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vyfoj")
-animation = &"attack"
-frame = 3
+animation = &"idle"
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(59, -10)
@@ -99,10 +98,6 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_d4agv")
-
-[node name="Sprite2D" type="Sprite2D" parent="Hitbox"]
-scale = Vector2(34.5, 36.54)
-texture = SubResource("CanvasTexture_2e5bj")
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]

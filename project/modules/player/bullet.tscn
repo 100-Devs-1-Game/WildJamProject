@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://tt37bu0jl5sw"]
+[gd_scene load_steps=5 format=3 uid="uid://tt37bu0jl5sw"]
 
 [ext_resource type="Script" uid="uid://biui1w0fqij5w" path="res://modules/player/bullet.gd" id="1_ers74"]
 [ext_resource type="Texture2D" uid="uid://ba0mj7r1hnuqo" path="res://assets/Bullet.png" id="2_jlhox"]
@@ -6,9 +6,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ers74"]
 radius = 4.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlhox"]
+radius = 4.0
+
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 8
+collision_mask = 0
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
@@ -24,5 +27,13 @@ texture = ExtResource("2_jlhox")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_jlhox")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
