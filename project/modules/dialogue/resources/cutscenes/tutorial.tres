@@ -1,0 +1,157 @@
+[gd_resource type="Resource" script_class="DialogueContainer" load_steps=23 format=3 uid="uid://ciyi42iyoebap"]
+
+[ext_resource type="Script" uid="uid://c4emqn111p6ux" path="res://modules/dialogue/dialogue_line.gd" id="1_v2hem"]
+[ext_resource type="Script" uid="uid://41ljhyl3bvqw" path="res://modules/dialogue/dialogue_option.gd" id="2_6okxy"]
+[ext_resource type="Script" uid="uid://bj5xjgc7bfc1e" path="res://modules/dialogue/dialogue_container.gd" id="2_fjxff"]
+[ext_resource type="Texture2D" uid="uid://d1ym7s03nbwyk" path="res://assets_external/placeholders/dialogue/robot-profile.png" id="3_bj1jm"]
+
+[sub_resource type="Resource" id="Resource_g3isf"]
+script = ExtResource("1_v2hem")
+id = "start"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "Android Unit 7, initialization complete. Humanity has been trapped within the skyscrapers for years. The world outside is now the Everchanging Maze. "
+next_line_id = "tutorial_1_questions"
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_38bo5"]
+script = ExtResource("2_6okxy")
+text = "...What? What is happening? Where am I?"
+next_line_id = "tutorial_1_where_i_am"
+effect = "1"
+metadata/_custom_type_script = "uid://41ljhyl3bvqw"
+
+[sub_resource type="Resource" id="Resource_lppqt"]
+script = ExtResource("2_6okxy")
+text = "I don't remember who I am..."
+next_line_id = "tutorial_1_who_am_i"
+effect = "1"
+metadata/_custom_type_script = "uid://41ljhyl3bvqw"
+
+[sub_resource type="Resource" id="Resource_uid1p"]
+script = ExtResource("2_6okxy")
+text = "Nothing. Ready to go."
+next_line_id = "tutorial_1_leave"
+effect = "1"
+metadata/_custom_type_script = "uid://41ljhyl3bvqw"
+
+[sub_resource type="Resource" id="Resource_txblj"]
+script = ExtResource("1_v2hem")
+id = "tutorial_1_questions"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "What do you need to know before departure?"
+options = Array[ExtResource("2_6okxy")]([SubResource("Resource_38bo5"), SubResource("Resource_lppqt"), SubResource("Resource_uid1p")])
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_3noir"]
+script = ExtResource("1_v2hem")
+id = "tutorial_1_where_i_am"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "You are inside Skyscraper Unit 01. The entire world outside has transformed into the Everchanging Maze - it shifts irrationally and corrupts human minds."
+next_line_id = "tutorial_2_where_i_am"
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_awed5"]
+script = ExtResource("2_6okxy")
+text = "...Okay?"
+next_line_id = "tutorial_2_okay"
+effect = "1"
+metadata/_custom_type_script = "uid://41ljhyl3bvqw"
+
+[sub_resource type="Resource" id="Resource_55uhv"]
+script = ExtResource("2_6okxy")
+text = "Death?!"
+next_line_id = "tutorial_2_android"
+effect = "1"
+metadata/_custom_type_script = "uid://41ljhyl3bvqw"
+
+[sub_resource type="Resource" id="Resource_xrm71"]
+script = ExtResource("1_v2hem")
+id = "tutorial_1_who_am_i"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "You are an Android Unit. Your kind was created to explore the Maze when humanity could not. Upon death, you will leave behind scrap upgrades for future units."
+options = Array[ExtResource("2_6okxy")]([SubResource("Resource_awed5"), SubResource("Resource_55uhv")])
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_1s4of"]
+script = ExtResource("1_v2hem")
+id = "tutorial_1_leave"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "Safe travels, Android. Return with valuable data or scrap upgrades. Humanity's survival depends on you."
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_fbh46"]
+script = ExtResource("1_v2hem")
+id = "tutorial_2_where_i_am"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "Your primary objective is to find Skyscraper Unit 02. Once located, you will receive a compass which will permanently point toward that sanctuary. Bring it back. It will allow future units to seek it and eventually restablish communication."
+next_line_id = "tutorial_1_questions"
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_aaweh"]
+script = ExtResource("1_v2hem")
+id = "tutorial_2_okay"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "Your journey will help rebuild the trade routes between skyscrapers. Each compass brings us closer to reconnection and prosperity."
+next_line_id = "tutorial_1_questions"
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_7bah4"]
+script = ExtResource("2_6okxy")
+text = "...Understood."
+next_line_id = "tutorial_3_understood"
+effect = "1"
+metadata/_custom_type_script = "uid://41ljhyl3bvqw"
+
+[sub_resource type="Resource" id="Resource_flet8"]
+script = ExtResource("2_6okxy")
+text = "What is the Maze?"
+next_line_id = "tutorial_3_maze"
+effect = "1"
+metadata/_custom_type_script = "uid://41ljhyl3bvqw"
+
+[sub_resource type="Resource" id="Resource_sgyq2"]
+script = ExtResource("1_v2hem")
+id = "tutorial_2_android"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "You may find bodies from previous Android units. Salvage their parts for stat upgrades. Their sacrifice becomes your strength."
+options = Array[ExtResource("2_6okxy")]([SubResource("Resource_7bah4"), SubResource("Resource_flet8")])
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_6nie4"]
+script = ExtResource("1_v2hem")
+id = "tutorial_3_maze"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "The Everchanging Maze is a corruption of this world's natural order. It holds many dangers: creatures that constantly evolve and adapt to consume all manner of life. It will react to your presence and try to confuse you at every turn. Tread carefully."
+next_line_id = "tutorial_4_maze"
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_pxd4v"]
+script = ExtResource("1_v2hem")
+id = "tutorial_3_understood"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "Excellent. The exit hatch is opening. May your circuits be swift and your aim true. Humanity awaits."
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[sub_resource type="Resource" id="Resource_68h1v"]
+script = ExtResource("1_v2hem")
+id = "tutorial_4_maze"
+speaker_name = "Global Cloud Network AI"
+speaker_image = ExtResource("3_bj1jm")
+text = "Traversing it is the only way to reconnect humanity's remains. Humans can't enter it as their fleshy minds are vulnarable to its influence. So it becomes the Homo Machina purpose to fulfil that dream and restablish communication. "
+next_line_id = "tutorial_1_questions"
+metadata/_custom_type_script = "uid://c4emqn111p6ux"
+
+[resource]
+script = ExtResource("2_fjxff")
+lines = Array[ExtResource("1_v2hem")]([SubResource("Resource_g3isf"), SubResource("Resource_txblj"), SubResource("Resource_3noir"), SubResource("Resource_xrm71"), SubResource("Resource_1s4of"), SubResource("Resource_fbh46"), SubResource("Resource_aaweh"), SubResource("Resource_sgyq2"), SubResource("Resource_6nie4"), SubResource("Resource_pxd4v"), SubResource("Resource_68h1v")])
+metadata/_custom_type_script = "uid://bj5xjgc7bfc1e"
