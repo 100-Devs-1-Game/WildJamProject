@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://btud2veydd6se"]
+
+[ext_resource type="PackedScene" uid="uid://cwqngw0f30fo5" path="res://modules/dialogue/components/dialogue_box.tscn" id="1_n2ovd"]
+
+[node name="DialogueManager" type="CanvasLayer"]
+
+[node name="DialogueBox" parent="." instance=ExtResource("1_n2ovd")]
