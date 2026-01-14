@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://0o84ijttq5gq"]
+
+[node name="TemplateButton" type="Button"]
+offset_right = 777.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 24
+text = "This is a dialogue option."
+autowrap_mode = 3
