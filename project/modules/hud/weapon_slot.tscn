@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxom55xj78atn"]
+[gd_scene load_steps=3 format=3 uid="uid://dxom55xj78atn"]
 
+[ext_resource type="Texture2D" uid="uid://d3ack7vxyxp8c" path="res://assets/ui/inventoryslotempty.png" id="1_i31un"]
 [ext_resource type="Texture2D" uid="uid://by414cje0yw6j" path="res://assets/hotbar_slot_frame.png" id="1_s2vfi"]
 
 [node name="WeaponSlot" type="Control"]
@@ -8,6 +9,13 @@ layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="BaseImage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_i31un")
+expand_mode = 1
 
 [node name="SlotImage" type="TextureRect" parent="."]
 layout_mode = 1
@@ -18,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SlotFrame" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -6,13 +6,8 @@ extends Control
 
 # Populate the hotbar with all items in same order
 func populate_hotbar(weapons: Array[Weapon]) -> void:
-	for weapon in weapons_hotbar_list.get_children():
-		weapon.queue_free()
-	for weapon in weapons:
-		var new_weapon_slot: Control = weapon_slot_scene.instantiate()
-		new_weapon_slot.get_node("SlotImage").texture = weapon.icon
-		new_weapon_slot.get_node("SlotFrame").visible = false
-		weapons_hotbar_list.add_child(new_weapon_slot)
+	for idx in range(len(weapons_hotbar_list.get_children())):
+		weapons_hotbar_list.get_child(idx).get_node("SlotImage").texture = weapons[idx].icon
 	select_item(0)
 
 # Hightlight the currentlty selected item by showing a frame around it

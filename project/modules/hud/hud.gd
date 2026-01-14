@@ -3,9 +3,9 @@ extends Node
 
 
 # a health bar
-@export var health_bar: ProgressBar
+@export var health_bar: TextureProgressBar
 # a sanity bar
-@export var sanity_bar: ProgressBar
+@export var sanity_bar: TextureProgressBar
 # ammo counter
 @export var ammo_count_label: Label
 # weapon hotbar for weapon switching
@@ -26,4 +26,4 @@ func set_sanity_bar_value(current_amount: float, max_amount: float) -> void:
 	sanity_bar.max_value = max_amount
 
 func set_ammo_count_value(current_amount: int, max_amount: int) -> void:
-	ammo_count_label.text = "%s/%s" % [current_amount, max_amount]
+	ammo_count_label.text = "%s / %s" % [current_amount, max_amount]
