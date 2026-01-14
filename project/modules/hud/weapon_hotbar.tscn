@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp0g5k1my0alh"]
+[gd_scene load_steps=3 format=3 uid="uid://bp0g5k1my0alh"]
 
 [ext_resource type="Script" uid="uid://bohd8mam57eds" path="res://modules/hud/weapon_hotbar.gd" id="1_ygpwo"]
+[ext_resource type="PackedScene" uid="uid://dxom55xj78atn" path="res://modules/hud/weapon_slot.tscn" id="2_1ysuv"]
 
 [node name="WeaponHotbar" type="Control" node_paths=PackedStringArray("weapons_hotbar_list")]
 layout_mode = 3
@@ -29,3 +30,30 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="WeaponSlot" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot2" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot3" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot4" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot5" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot6" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot7" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot8" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2
+
+[node name="WeaponSlot9" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+layout_mode = 2

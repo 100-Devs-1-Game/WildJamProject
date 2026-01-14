@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c7ewp0647v5ek"]
+
+[ext_resource type="Texture2D" uid="uid://ccf7hlu0gabf7" path="res://assets/ui/button.png" id="1_hqjoi"]
+[ext_resource type="Texture2D" uid="uid://disvt8ch0jd16" path="res://assets/ui/buttonpressed.png" id="2_m72v5"]
+[ext_resource type="FontFile" uid="uid://d0r500qnwi5wn" path="res://assets_external/Lacquer-Regular.ttf" id="3_m72v5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hqjoi"]
+texture = ExtResource("1_hqjoi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vw0k4"]
+texture = ExtResource("1_hqjoi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hcgci"]
+texture = ExtResource("2_m72v5")
+
+[resource]
+default_font = ExtResource("3_m72v5")
+Button/colors/font_color = Color(0.24707845, 0, 0.0904179, 1)
+Button/font_sizes/font_size = 40
+Button/styles/hover = SubResource("StyleBoxTexture_hqjoi")
+Button/styles/normal = SubResource("StyleBoxTexture_vw0k4")
+Button/styles/pressed = SubResource("StyleBoxTexture_hcgci")
