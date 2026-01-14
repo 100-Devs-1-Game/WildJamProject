@@ -1,0 +1,148 @@
+[gd_scene load_steps=21 format=3 uid="uid://chqkwco5216a2"]
+
+[ext_resource type="Script" path="res://modules/enemies/enemy.gd" id="1_g8jw3"]
+[ext_resource type="Texture2D" uid="uid://2bspddvpnnqn" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0000.png" id="2_a0yjh"]
+[ext_resource type="Texture2D" uid="uid://dlk87le4g1ikx" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0001.png" id="3_y8tff"]
+[ext_resource type="Texture2D" uid="uid://bxhvghaxj7vqb" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0002.png" id="4_4p0d6"]
+[ext_resource type="Texture2D" uid="uid://uhwpyxk18cej" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0003.png" id="5_pwptg"]
+[ext_resource type="Texture2D" uid="uid://efocgfpbbx66" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0004.png" id="6_6yxhk"]
+[ext_resource type="Texture2D" uid="uid://cla4p5fqid1gk" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0005.png" id="7_4weya"]
+[ext_resource type="Texture2D" uid="uid://ciqlx574y3rus" path="res://assets/placeholder_enemy/walk/PlaceholderWalk0000.png" id="8_jrxik"]
+[ext_resource type="Texture2D" uid="uid://ivna8tes4exo" path="res://assets/enemies/DF-Tatzelwurm.png" id="9_5v3om"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4agv"]
+radius = 1000.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8l286"]
+radius = 25.0
+height = 224.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htcjc"]
+atlas = ExtResource("9_5v3om")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mw53"]
+atlas = ExtResource("9_5v3om")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13sy4"]
+atlas = ExtResource("9_5v3om")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81mrp"]
+atlas = ExtResource("9_5v3om")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d1nr"]
+atlas = ExtResource("9_5v3om")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idqrr"]
+atlas = ExtResource("9_5v3om")
+region = Rect2(320, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vyfoj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a0yjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y8tff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4p0d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pwptg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6yxhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4weya")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_jrxik")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htcjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mw53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13sy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81mrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6d1nr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idqrr")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d4agv"]
+radius = 54.0
+height = 110.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2e5bj"]
+
+[node name="DF-tatzelwurm" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_g8jw3")
+
+[node name="DetectionRange" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource("CircleShape2D_d4agv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_8l286")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(36, -19)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_vyfoj")
+animation = &"walk"
+frame_progress = 0.766644
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(59, -10)
+collision_layer = 0
+collision_mask = 16
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_d4agv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hitbox"]
+scale = Vector2(34.5, 36.54)
+texture = SubResource("CanvasTexture_2e5bj")
+
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
+[connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
