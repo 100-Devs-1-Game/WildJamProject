@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://bjnlfquit4bm8"]
+
+[ext_resource type="Texture2D" uid="uid://elkp0umlm138" path="res://assets/player_parts/Weapons.png" id="1_h6orl"]
+[ext_resource type="Script" uid="uid://cd87etkkjjin8" path="res://modules/items/weapon.gd" id="1_i0wum"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_om2kc"]
+atlas = ExtResource("1_h6orl")
+region = Rect2(0, 0, 48, 14)
+
+[resource]
+script = ExtResource("1_i0wum")
+type = 1
+name = "Blunderbuss"
+flavor = "Goes boom boom"
+icon = SubResource("AtlasTexture_om2kc")
+metadata/_custom_type_script = "uid://cd87etkkjjin8"
