@@ -26,11 +26,11 @@ func _ready() -> void:
 			hitbox.collision_mask = 1 << (CollisionLayers.PLAYERHURTBOX - 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 # Physics process
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Move bullet
 	linear_velocity = transform.x * speed
 	pass

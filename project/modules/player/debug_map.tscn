@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bij2gt0m1r71w"]
+[gd_scene load_steps=24 format=4 uid="uid://bij2gt0m1r71w"]
 
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="1_5ydlk"]
 [ext_resource type="Script" uid="uid://b1clykhmyy28s" path="res://modules/player/debug_map.gd" id="1_cychg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://6pxn481uvxgq" path="res://assets_external/placeholders/basic-topdown/TX Struct.png" id="9_irdpc"]
 [ext_resource type="Texture2D" uid="uid://d2tqsnern3bxe" path="res://assets_external/placeholders/basic-topdown/TX Tileset Wall.png" id="10_kgu46"]
 [ext_resource type="PackedScene" uid="uid://833q7u8hgfk5" path="res://modules/enemies/enemy.tscn" id="11_ud308"]
+[ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="13_cychg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fwl07"]
 texture = ExtResource("2_ud308")
@@ -2196,3 +2197,7 @@ scale = Vector2(0.8, 0.8)
 attack_damage = 10
 attack_cooldown = 1.0
 is_ranged = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("13_cychg")]

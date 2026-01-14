@@ -9,11 +9,12 @@ var tween: Tween
 var _coords: Vector2i
 var _terrain: TileMapLayer
 var _is_moving := false
-const kick_animation_time = 0.2
+const kick_animation_time = 0.15
 
 var item_picker: Node2D
 
 func _ready() -> void:
+	$Label.hide()
 	$PickupRangeArea2D.connect("body_entered", player_entered.bind(true))
 	$PickupRangeArea2D.connect("body_exited", player_entered.bind(false))
 	$KickRangeArea2D.connect("body_entered", kick_item)
@@ -22,9 +23,11 @@ func player_entered(body: Node2D, entered: bool):
 	if body.has_method("pickup_item"):
 		if entered:
 			# TODO the player is in range, maybe we can highlight items in range?
+			$Label.show()
 			item_picker = body
 		else:
 			# TODO the player is not in range anymore
+			$Label.hide()
 			item_picker = null
 			
 func kick_item(body: Node2D):
@@ -57,26 +60,33 @@ func kick_item(body: Node2D):
 		can_kick = true
 	if can_kick:
 		# We can kick the item to that direction
-		_coords = new_coords
-		_is_moving = true
-		var tween2 = create_tween()
-		tween2.set_parallel(true)
-		tween2.set_ease(Tween.EASE_IN_OUT)
-		tween2.set_trans(Tween.TRANS_QUAD)
-		var final_position = kick_direction * _terrain.tile_set.tile_size.x * _terrain.scale.x
-		tween2.tween_property(self, "position", final_position, kick_animation_time).as_relative()
-		# Add a vertical arch to the sprite
-		tween2.set_ease(Tween.EASE_OUT)
-		tween2.tween_property($Sprite2D, "position:y", _terrain.tile_set.tile_size.x*-3.0, kick_animation_time * 0.5).as_relative()
-		tween2.set_ease(Tween.EASE_IN)
-		tween2.tween_property($Sprite2D, "position:y", 0.0, kick_animation_time * 0.5).as_relative().set_delay(kick_animation_time * 0.5)
-		tween2.chain()
-		tween2.tween_callback(kick_item_reset)
+		kick_item_animation(new_coords)
 	else:
 		# Stay in place
 		pass
-func kick_item_reset():
-	_is_moving = false	
+
+		
+func kick_item_animation(new_coords: Vector2i):
+	_coords = new_coords
+	_is_moving = true
+	var tween2 = create_tween()
+	tween2.set_parallel(true)
+	tween2.set_ease(Tween.EASE_IN_OUT)
+	tween2.set_trans(Tween.TRANS_QUAD)
+	var final_position = _terrain.map_to_local(new_coords) + _terrain.tile_set.tile_size * 0.5
+	final_position += Utils.random_vec2(_terrain.tile_set.tile_size)
+	final_position = _terrain.to_global(final_position)
+	tween2.tween_property(self, "position", final_position, kick_animation_time)
+	# Add a vertical arch to the sprite
+	tween2.set_ease(Tween.EASE_OUT)
+	tween2.tween_property($Sprite2D, "position:y", _terrain.tile_set.tile_size.x*-3.0, kick_animation_time * 0.5).as_relative()
+	tween2.set_ease(Tween.EASE_IN)
+	tween2.tween_property($Sprite2D, "position:y", 0.0, kick_animation_time * 0.5).as_relative().set_delay(kick_animation_time * 0.5)
+	tween2.chain()
+	tween2.tween_callback(kick_item_animation_end)
+
+func kick_item_animation_end():
+	_is_moving = false
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_action("interact") and event.is_pressed():
