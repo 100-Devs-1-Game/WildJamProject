@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dru8puxo6flwq"]
+
+[ext_resource type="Script" uid="uid://dscxkjc42rhx7" path="res://modules/player/player_inventory.gd" id="1_kt1ex"]
+
+[node name="PlayerInventory" type="Node2D"]
+script = ExtResource("1_kt1ex")
+row_count = 4
+column_count = 4
+metadata/_custom_type_script = "uid://dscxkjc42rhx7"
+
+[node name="PlayerDoll" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UnusedItems" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Generate" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Generate new android inventory"
+
+[connection signal="pressed" from="Generate" to="." method="_on_generate_pressed"]
