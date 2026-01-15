@@ -9,9 +9,8 @@ region = Rect2(0, 14, 48, 14)
 
 [resource]
 script = ExtResource("2_kixpy")
-item_id = 1
-name = "Blunderbuss"
-flavor = "Goes boom boom"
+name = "Katana"
+flavor = "Quck slice!"
 icon = SubResource("AtlasTexture_om2kc")
 model_name = "LEG01"
 metadata/_custom_type_script = "uid://cd87etkkjjin8"

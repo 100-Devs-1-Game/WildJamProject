@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://beyof82fhxni3"]
+
+[ext_resource type="Texture2D" uid="uid://cwpvv1q45m832" path="res://assets/player_parts/Android_arm_sheet_9x9.png" id="1_4rvc7"]
+[ext_resource type="Script" uid="uid://de1n1kpgq7enk" path="res://modules/items/upgrade.gd" id="2_4rvc7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8oi5"]
+atlas = ExtResource("1_4rvc7")
+region = Rect2(0, 0, 9, 9)
+
+[resource]
+script = ExtResource("2_4rvc7")
+type = 1
+name = "Android Arm"
+flavor = "Fresh from the press!"
+icon = SubResource("AtlasTexture_g8oi5")
+icon_variants = 10
+metadata/_custom_type_script = "uid://yngljnvn1p5e"
