@@ -48,10 +48,10 @@ texture_region_size = Vector2i(128, 128)
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_kgu46")
 
-[node name="DebugMap" type="Node2D"]
+[node name="DebugMap" type="Node2D" node_paths=PackedStringArray("terrain")]
 y_sort_enabled = true
 script = ExtResource("1_cychg")
-terrain_reference = NodePath("Terrain")
+terrain = NodePath("Terrain")
 
 [node name="Terrain" type="TileMapLayer" parent="."]
 z_index = -1
