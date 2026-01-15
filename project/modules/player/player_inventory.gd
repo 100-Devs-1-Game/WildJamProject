@@ -1,6 +1,12 @@
 class_name  PlayerInventory
 extends Node2D
 
+const item_library = [
+	"res://data/items/blunderbuss.tres",
+	"res://data/items/katana.tres",
+	"res://data/items/polearm.tres",
+]
+
 @export var row_count: int
 @export var column_count: int
 
@@ -18,9 +24,9 @@ func generate_new_android_inventory() -> void:
 
 func add_item(item: Item, count: int) -> void:
 	if item in inventory:
-		inventory[item] = count
-	else:
 		inventory[item] += count
+	else:
+		inventory[item] = count
 
 func remove_item(item: Item, count: int) -> void:
 	inventory[item] -= count

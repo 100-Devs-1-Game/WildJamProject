@@ -2,8 +2,9 @@
 class_name ItemInstance
 extends Node2D
 
-var item_id:=-1
+var item: Item
 var tween: Tween
+@export var kick_arch_height := 32.0
 
 # For the kick around logic, instead of relying on physics, we can use the tilemap and ensure the item is only moved onto valid tiles. 
 var _coords: Vector2i
@@ -52,10 +53,7 @@ func kick_item(body: Node2D):
 	var new_coords = _coords
 	# First try to kick 2 cells away, if not possible, 1 cell away
 	var can_kick = false
-	if new_coords + kick_direction * 2 in _terrain.get_used_cells():
-		new_coords += kick_direction * 2
-		can_kick = true
-	elif new_coords + kick_direction in _terrain.get_used_cells():
+	if new_coords + kick_direction in _terrain.get_used_cells():
 		new_coords += kick_direction
 		can_kick = true
 	if can_kick:
@@ -75,11 +73,11 @@ func kick_item_animation(new_coords: Vector2i):
 	tween2.set_trans(Tween.TRANS_QUAD)
 	var final_position = _terrain.map_to_local(new_coords) + _terrain.tile_set.tile_size * 0.5
 	final_position += Utils.random_vec2(_terrain.tile_set.tile_size)
-	final_position = _terrain.to_global(final_position)
+	#final_position = _terrain.to_global(final_position)
 	tween2.tween_property(self, "position", final_position, kick_animation_time)
 	# Add a vertical arch to the sprite
 	tween2.set_ease(Tween.EASE_OUT)
-	tween2.tween_property($Sprite2D, "position:y", _terrain.tile_set.tile_size.x*-3.0, kick_animation_time * 0.5).as_relative()
+	tween2.tween_property($Sprite2D, "position:y", -kick_arch_height, kick_animation_time * 0.5).as_relative()
 	tween2.set_ease(Tween.EASE_IN)
 	tween2.tween_property($Sprite2D, "position:y", 0.0, kick_animation_time * 0.5).as_relative().set_delay(kick_animation_time * 0.5)
 	tween2.chain()
@@ -93,8 +91,9 @@ func _input(event: InputEvent) -> void:
 		pickup_item()
 
 func pickup_item():
-	if item_picker:
-		item_picker.pickup_item(self)
+	if item_picker and not _is_moving:
+		_is_moving = true
+		item_picker.pickup_item(item)
 		destroy_item()
 		
 func destroy_item():
@@ -108,12 +107,13 @@ func destroy_item():
 	tween.tween_callback(queue_free)
 
 
-func load_item(item_id_:int, coords: Vector2i=Vector2i.ZERO, terrain: TileMapLayer=null):
+func load_item(item_:Item, coords: Vector2i=Vector2i.ZERO, terrain: TileMapLayer=null):
 	# Intentionally avoiding using setters here since the default values also trigger setter calls on initialization
-	item_id = item_id_
+	item = item_
 	var item_library = preload("res://assets/3d/items/item_drops.tscn").instantiate()
-	mesh_instance = item_library.get_child(item_id).duplicate()
-	mesh_instance.position = Vector3.ZERO
+	if item.model_name:
+		mesh_instance = item_library.get_node_or_null(item.model_name).duplicate()
+		mesh_instance.position = Vector3.ZERO
 	# For keeping track of kicking logic
 	_coords = coords
 	_terrain = terrain

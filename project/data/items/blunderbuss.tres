@@ -13,4 +13,5 @@ type = 1
 name = "Blunderbuss"
 flavor = "Goes boom boom"
 icon = SubResource("AtlasTexture_om2kc")
+model_name = "ARM01"
 metadata/_custom_type_script = "uid://cd87etkkjjin8"
