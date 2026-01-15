@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bij2gt0m1r71w"]
+[gd_scene load_steps=18 format=4 uid="uid://bij2gt0m1r71w"]
 
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="1_5ydlk"]
 [ext_resource type="Script" uid="uid://b1clykhmyy28s" path="res://modules/player/debug_map.gd" id="1_cychg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cda1dv18ntql7" path="res://assets/tilemap/dark_forest/ground_tile_forest_3.png" id="4_ud308"]
 [ext_resource type="Texture2D" uid="uid://7462qckh0dm0" path="res://assets/tilemap/dark_forest/forest_border.png" id="5_qcm26"]
 [ext_resource type="Texture2D" uid="uid://cum3y5bgg7gjx" path="res://assets/tilemap/dark_forest/boulder_3.png" id="6_cychg"]
+[ext_resource type="PackedScene" uid="uid://dru8puxo6flwq" path="res://modules/player/player_inventory.tscn" id="10_4gjip"]
 [ext_resource type="PackedScene" uid="uid://833q7u8hgfk5" path="res://modules/enemies/enemy.tscn" id="11_ud308"]
 [ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="13_cychg"]
 
@@ -81,3 +82,5 @@ is_ranged = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("13_cychg")]
+
+[node name="PlayerInventory" parent="." instance=ExtResource("10_4gjip")]

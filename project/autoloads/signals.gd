@@ -18,3 +18,5 @@ signal change_sanity_value(current_amount: float, max_amount: float)
 signal change_ammo_count_value(current_amount: int, max_amount: int)
 ## Emitted when the weapon hotbar needs to be updated
 signal weapon_update(weapons: Array[Weapon])
+## Emitted when an item is picked up
+signal item_picked_up(item: Item)

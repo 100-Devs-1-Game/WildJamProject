@@ -9,7 +9,6 @@ region = Rect2(0, 14, 48, 14)
 
 [resource]
 script = ExtResource("2_kixpy")
-item_id = 1
 name = "Katana"
 flavor = "Quck slice!"
 icon = SubResource("AtlasTexture_om2kc")
