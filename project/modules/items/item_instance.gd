@@ -91,7 +91,8 @@ func _input(event: InputEvent) -> void:
 		pickup_item()
 
 func pickup_item():
-	if item_picker:
+	if item_picker and not _is_moving:
+		_is_moving = true
 		item_picker.pickup_item(item)
 		destroy_item()
 		
