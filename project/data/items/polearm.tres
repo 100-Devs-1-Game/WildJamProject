@@ -10,8 +10,8 @@ region = Rect2(0, 14, 48, 14)
 [resource]
 script = ExtResource("2_wyvwt")
 item_id = 2
-name = "Blunderbuss"
-flavor = "Goes boom boom"
+name = "Polearm"
+flavor = "Stay away from me!"
 icon = SubResource("AtlasTexture_om2kc")
 model_name = "TOR01"
 metadata/_custom_type_script = "uid://cd87etkkjjin8"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://dswh1m7weyoc5"]
+
+[ext_resource type="Script" uid="uid://de1n1kpgq7enk" path="res://modules/items/upgrade.gd" id="1_gxak5"]
+[ext_resource type="Texture2D" uid="uid://bi1gxmmhaheeo" path="res://assets/player_parts/Android_torso_sheet_13x13.png" id="1_j5n30"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5td40"]
+atlas = ExtResource("1_j5n30")
+region = Rect2(0, 0, 13, 13)
+
+[resource]
+script = ExtResource("1_gxak5")
+type = 2
+name = "Android Torso"
+flavor = "Factory Grade"
+icon = SubResource("AtlasTexture_5td40")
+icon_variants = 10
+current_icon_variant = 1
+metadata/_custom_type_script = "uid://de1n1kpgq7enk"

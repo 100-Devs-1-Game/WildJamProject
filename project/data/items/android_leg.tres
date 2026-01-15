@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://bs5qt0a6avd62"]
+
+[ext_resource type="Texture2D" uid="uid://cj1finvotitst" path="res://assets/player_parts/Android_legs_sheet_15x12.png" id="1_7j0qn"]
+[ext_resource type="Script" uid="uid://de1n1kpgq7enk" path="res://modules/items/upgrade.gd" id="2_7j0qn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p281a"]
+atlas = ExtResource("1_7j0qn")
+region = Rect2(0, 0, 15, 12)
+
+[resource]
+script = ExtResource("2_7j0qn")
+name = "Android Legs"
+flavor = "Fabricator Quality"
+icon = SubResource("AtlasTexture_p281a")
+icon_variants = 7
+current_icon_variant = 1
+metadata/_custom_type_script = "uid://yngljnvn1p5e"

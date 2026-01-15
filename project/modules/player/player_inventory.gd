@@ -17,7 +17,8 @@ var equipped_legs: Item
 var equipped_weapon: Weapon
 
 func _ready() -> void:
-	pass#hide()
+	hide()
+
 
 func generate_new_android_inventory() -> void:
 	pass
