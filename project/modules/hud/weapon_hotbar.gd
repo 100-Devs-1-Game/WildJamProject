@@ -4,9 +4,12 @@ extends Control
 @export var weapons_hotbar_list: HBoxContainer
 @onready var weapon_slot_scene: PackedScene = preload("res://modules/hud/weapon_slot.tscn")
 
+func _ready() -> void:
+	Signals.weapon_update.connect(populate_hotbar)
+
 # Populate the hotbar with all items in same order
 func populate_hotbar(weapons: Array[Weapon]) -> void:
-	for idx in range(len(weapons_hotbar_list.get_children())):
+	for idx in min(len(weapons), len(weapons_hotbar_list.get_children())):
 		weapons_hotbar_list.get_child(idx).get_node("SlotImage").texture = weapons[idx].icon
 	select_item(0)
 

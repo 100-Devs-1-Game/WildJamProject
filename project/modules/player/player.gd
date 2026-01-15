@@ -123,13 +123,21 @@ func get_nearest_enemy_from_aim(check_dir: Vector2) -> Node2D:
 
 
 var player_item_inventory = {}
-func pickup_item(item: ItemInstance):
-	prints("The player picked up the item with ID:", item.item_id, "the player now has:", player_item_inventory)
+func pickup_item(item: Item):
 	# TODO apply item properties to the player or add it to their inventory
-	if item.item_id in player_item_inventory:
-		player_item_inventory[item.item_id] += 1
+	if item in player_item_inventory:
+		player_item_inventory[item] += 1
 	else:
-		player_item_inventory[item.item_id] = 1
+		player_item_inventory[item] = 1
+	prints("The player picked up the item with ID:", item.item_id, "the player now has:", player_item_inventory)
+	var weapons: Array[Weapon]
+	for i in player_item_inventory:
+		if i is Weapon and i not in weapons:
+			weapons.append(i)
+	Signals.weapon_update.emit(weapons)
+			
+		
+	
 	ammo += 100
 
 # Take damage

@@ -1,6 +1,12 @@
 class_name  PlayerInventory
 extends Node2D
 
+const item_library = [
+	"res://data/items/blunderbuss.tres",
+	"res://data/items/katana.tres",
+	"res://data/items/polearm.tres",
+]
+
 @export var row_count: int
 @export var column_count: int
 

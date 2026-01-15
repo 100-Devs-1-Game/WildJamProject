@@ -2,7 +2,7 @@
 class_name ItemInstance
 extends Node2D
 
-var item_id:=-1
+var item: Item
 var tween: Tween
 @export var kick_arch_height := 32.0
 
@@ -92,7 +92,7 @@ func _input(event: InputEvent) -> void:
 
 func pickup_item():
 	if item_picker:
-		item_picker.pickup_item(self)
+		item_picker.pickup_item(item)
 		destroy_item()
 		
 func destroy_item():
@@ -106,12 +106,13 @@ func destroy_item():
 	tween.tween_callback(queue_free)
 
 
-func load_item(item_id_:int, coords: Vector2i=Vector2i.ZERO, terrain: TileMapLayer=null):
+func load_item(item_:Item, coords: Vector2i=Vector2i.ZERO, terrain: TileMapLayer=null):
 	# Intentionally avoiding using setters here since the default values also trigger setter calls on initialization
-	item_id = item_id_
+	item = item_
 	var item_library = preload("res://assets/3d/items/item_drops.tscn").instantiate()
-	mesh_instance = item_library.get_child(item_id).duplicate()
-	mesh_instance.position = Vector3.ZERO
+	if item.model_name:
+		mesh_instance = item_library.get_node_or_null(item.model_name).duplicate()
+		mesh_instance.position = Vector3.ZERO
 	# For keeping track of kicking logic
 	_coords = coords
 	_terrain = terrain
