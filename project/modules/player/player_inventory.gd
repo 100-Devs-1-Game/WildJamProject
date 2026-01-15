@@ -18,9 +18,9 @@ func generate_new_android_inventory() -> void:
 
 func add_item(item: Item, count: int) -> void:
 	if item in inventory:
-		inventory[item] = count
-	else:
 		inventory[item] += count
+	else:
+		inventory[item] = count
 
 func remove_item(item: Item, count: int) -> void:
 	inventory[item] -= count
