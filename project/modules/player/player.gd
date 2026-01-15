@@ -39,6 +39,9 @@ var invincible := false
 @export var max_ammo := 100
 var ammo := max_ammo
 
+var target_enemy: Node2D
+
+
 func _ready() -> void:
 	bullet_timer.start(shoot_rate)
 	_post_ready.call_deferred() 
@@ -52,7 +55,14 @@ func _post_ready():
 func _process(_delta: float) -> void:
 	var looking_right := global_position.x < get_global_mouse_position().x
 	model.scale.x = model_scale if looking_right else -model_scale 
-	shoulder.look_at(get_global_mouse_position())
+	
+	if not is_instance_valid(target_enemy):
+		target_enemy= null
+		
+	if target_enemy:
+		shoulder.look_at(target_enemy.global_position)
+	else:
+		shoulder.rotation = 0
 
 func _physics_process(delta: float) -> void:
 	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
@@ -80,19 +90,19 @@ func _physics_process(delta: float) -> void:
 		if not animation_player.is_playing():
 			animation_player.play("walk")
 
+	# Autoaim to nearest enemy
+	target_enemy = get_nearest_enemy_from_aim(aim_dir)
+
 func _on_bullet_timer_timeout() -> void:
 	if ammo <= 0:
 		return
 	ammo -= 1
 	
-	# Autoaim to nearest enemy
-	var enemy = get_nearest_enemy_from_aim(aim_dir)
-	
 	# Create bullets in aim_dir
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
-	if (enemy != null):
-		bullet.rotation = (enemy.global_position - bullet.global_position).angle()
+	if target_enemy != null:
+		bullet.rotation = (target_enemy.global_position - bullet.global_position).angle()
 	else:
 		bullet.rotation = aim_dir.angle()
 	bullet.set_owner_player()
