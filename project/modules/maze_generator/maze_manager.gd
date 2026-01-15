@@ -1,10 +1,10 @@
-class_name maze_manager
+class_name Maze_manager
 extends Node2D
 
 @export var maze_size_x: int = 50
 @export var maze_size_y: int = 50
 
-@onready var tile_gen: tile_generator = $tile_generator
+@onready var tile_gen: Tile_generator = $tile_generator
 
 ## Generates a new maze [br]
 ## Note: will overwrite old maze stored

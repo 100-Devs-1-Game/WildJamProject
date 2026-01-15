@@ -1,4 +1,4 @@
-class_name tile_generator
+class_name Tile_generator
 extends Node2D 
 
 # width and height for the maze
