@@ -1,14 +1,14 @@
-class_name Tile_generator
-extends Node2D 
+class_name TileGenerator
+
+# minimum size for each "tile"
+# tiles must be  bigger by area in percentage AND total number of tiles
+const MIN_TILE_PERCENT: float = 0.01
+const MIN_TILE_TOTAL: int = 9
 
 # width and height for the maze
 var num_col: int
 var num_row: int
 
-# minimum size for each "tile"
-# tiles must be  bigger by area in percentage AND total number of tiles
-@export var min_tile_percent: float = 0.01
-@export var min_tile_total: int = 9
 
 var map: Array
 var tilelist: Array[Tile]
@@ -57,7 +57,6 @@ func cellular_automata():
 			else:
 				newmap[row].append(map[row][col])
 	map = newmap
-	queue_redraw()
 
 ## Add in extra cells post CA, to create nicer corners in the maze. [br]
 ## Can leave the maze feeling too filled in if too much is smoothed out
@@ -72,7 +71,6 @@ func smooth():
 			# 01
 			elif map[row][col] == 1 and map[row+1][col] == 0 and map[row][col+1] == 0 and map[row+1][col+1] == 1:
 				map[row][col+1] = 1	
-	queue_redraw()
 
 ## Split tiles into two smaller tiles recursively. [br]
 ## Uses Binary Partition Tree principles [br]
@@ -86,7 +84,7 @@ func _split(current_tile : Tile):
 	#adjust the randge to add more varience to tile sizes
 	var splitval = randf_range(0.4, 0.7)
 	# Base case is a tile is at or below minimum size (area or total size)
-	if(current_tile.num_rows * current_tile.num_cols <= max(num_row * num_col *min_tile_percent,9)):
+	if(current_tile.num_rows * current_tile.num_cols <= max(num_row * num_col *MIN_TILE_PERCENT,9)):
 		tilelist.append(current_tile)
 		return
 	elif(current_tile.num_rows >= current_tile.num_cols):
@@ -107,17 +105,3 @@ func _split(current_tile : Tile):
 			ceil(current_tile.num_cols*(1-splitval)), 
 			Vector2i(current_tile.map_coords.x + floor(current_tile.num_cols * splitval), current_tile.map_coords.y ))
 			)
-
-
-func _draw():
-	#Temporary draw function to visualise the int map, can scrap later when we have actual sprites to use
-	var windowsize = get_viewport().get_visible_rect().size
-	var blockwidth = windowsize.x/num_col
-	var blockheight = windowsize.y/num_row
-	for current_tile in tilelist:
-		for row in current_tile.num_rows:
-			for col in current_tile.num_cols:
-				if map[row+current_tile.map_coords.y][col+current_tile.map_coords.x] == 1:
-					draw_rect(Rect2((col+current_tile.map_coords.x) *blockwidth, (row+current_tile.map_coords.y)*blockheight, blockwidth,blockheight), Color.WHEAT)
-				else:
-					draw_rect(Rect2((col+current_tile.map_coords.x) *blockwidth, (row+current_tile.map_coords.y)*blockheight, blockwidth,blockheight), Color.BLACK)
