@@ -43,7 +43,7 @@ var target_enemy: Node2D
 
 
 func _ready() -> void:
-	bullet_timer.start(shoot_rate)
+	bullet_timer.wait_time= shoot_rate
 	_post_ready.call_deferred() 
 	
 func _post_ready():
@@ -92,12 +92,10 @@ func _physics_process(delta: float) -> void:
 
 	# Autoaim to nearest enemy
 	target_enemy = get_nearest_enemy_from_aim(aim_dir)
+	if target_enemy and bullet_timer.is_stopped():
+		shoot()
 
-func _on_bullet_timer_timeout() -> void:
-	if ammo <= 0:
-		return
-	ammo -= 1
-	
+func shoot():
 	# Create bullets in aim_dir
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
@@ -107,8 +105,16 @@ func _on_bullet_timer_timeout() -> void:
 		bullet.rotation = aim_dir.angle()
 	bullet.set_owner_player()
 	get_parent().add_child(bullet)
-	Signals.change_ammo_count_value.emit(ammo, max_ammo)
+	Signals.change_ammo_count_value.emit(ammo, max_ammo)	
+	bullet_timer.start()
 
+func _on_bullet_timer_timeout() -> void:
+	if ammo <= 0:
+		return
+	ammo -= 1
+
+	if target_enemy:
+		shoot()
 
 # Get nearest enemy based on aim vector
 func get_nearest_enemy_from_aim(check_dir: Vector2) -> Node2D:

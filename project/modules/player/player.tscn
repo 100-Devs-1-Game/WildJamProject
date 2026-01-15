@@ -218,6 +218,7 @@ libraries = {
 }
 
 [node name="BulletTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Hurtbox" parent="." instance=ExtResource("9_dhhsu")]
 
