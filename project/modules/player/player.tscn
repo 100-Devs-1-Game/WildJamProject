@@ -145,6 +145,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 11
 script = ExtResource("1_hqo1x")
 friction = 10000.0
 bullet_scene = ExtResource("2_m7q0d")
@@ -221,5 +222,7 @@ libraries = {
 one_shot = true
 
 [node name="Hurtbox" parent="." instance=ExtResource("9_dhhsu")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]

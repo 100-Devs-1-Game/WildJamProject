@@ -2,14 +2,50 @@ class_name Level
 extends Node2D
 
 const CORPSE_ITEM_COUNT = 5
+const BORDER_TILE_SOURCE_ID = 3
+
+@export var size: Vector2i = Vector2i(50, 50)
 
 @export var terrain: TileMapLayer
+@export var player_scene: PackedScene
 
 var item_library = []
+var player: IsometricPlayer
+var safezones: Array[Vector2i]
 
 
 func _ready() -> void:
+	init_signals()
+	
+	build()
+	assert(player_scene)
+	var center := terrain.map_to_local(size / 2)
+	spawn_player(terrain.map_to_local(find_nearest_walkable_tile(center)))
+	
+func init_signals():
 	Signals.enemy_destroyed.connect(spawn_items_from_corpse)
+
+func build():
+	MazeGenerator.generate_maze(size.x, size.y)
+	for x in size.x:
+		for y in size.y:
+			var walkable: bool = MazeGenerator.map[x][y]
+			var pos := Vector2i(x, y)
+			terrain.set_cell(pos, randi() % BORDER_TILE_SOURCE_ID if walkable else BORDER_TILE_SOURCE_ID, Vector2.ZERO)
+
+func find_nearest_walkable_tile(pos: Vector2)-> Vector2i:
+	var nearest = null
+	for tile in terrain.get_used_cells():
+		if terrain.get_cell_tile_data(tile).get_custom_data("border"):
+			continue
+		if not nearest or pos.distance_to(terrain.map_to_local(tile)) < pos.distance_to(terrain.map_to_local(nearest)):  
+			nearest= tile
+	return nearest
+
+func spawn_player(pos: Vector2):
+	player = player_scene.instantiate()
+	player.position = pos
+	add_child(player)
 
 func spawn_items_from_corpse(enemy: MazeEnemy):
 	if not terrain:
