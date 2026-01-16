@@ -3,6 +3,7 @@ extends Node2D
 
 const CORPSE_ITEM_COUNT = 5
 const BORDER_TILE_SOURCE_ID = 3
+const SAFE_ZONE_SOURCE_ID = 4
 
 @export var size: Vector2i = Vector2i(50, 50)
 
@@ -26,12 +27,24 @@ func init_signals():
 	Signals.enemy_destroyed.connect(spawn_items_from_corpse)
 
 func build():
-	MazeGenerator.generate_maze(size.x, size.y)
+	var force_safezone := false
+	if Progress.safezone_state == Progress.SafezoneState.NO_SAFEZONE_FOUND:
+		force_safezone = true
+		while not Progress.first_safezone_pos:
+			var rnd_pos := Vector2i(randi_range(1, size.x  - 2), randi_range(1, size.y  - 2))
+			Progress.first_safezone_pos= rnd_pos
+		safezones.append(Progress.first_safezone_pos)
+
+	MazeGenerator.generate_maze(size.x, size.y, force_safezone, Progress.first_safezone_pos)
+	
 	for x in size.x:
 		for y in size.y:
 			var walkable: bool = MazeGenerator.map[x][y]
 			var pos := Vector2i(x, y)
 			terrain.set_cell(pos, randi() % BORDER_TILE_SOURCE_ID if walkable else BORDER_TILE_SOURCE_ID, Vector2.ZERO)
+
+	for tile in safezones:
+		terrain.set_cell(tile, SAFE_ZONE_SOURCE_ID, Vector2i.ZERO)
 
 func find_nearest_walkable_tile(pos: Vector2)-> Vector2i:
 	var nearest = null
