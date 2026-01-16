@@ -19,7 +19,8 @@ func _ready() -> void:
 	
 	build()
 	assert(player_scene)
-	spawn_player(find_nearest_walkable_tile(Vector2.ZERO))
+	var center := terrain.map_to_local(size / 2)
+	spawn_player(terrain.map_to_local(find_nearest_walkable_tile(center)))
 	
 func init_signals():
 	Signals.enemy_destroyed.connect(spawn_items_from_corpse)
