@@ -30,6 +30,7 @@ Achievements="*res://autoloads/achievements.gd"
 Settings="*res://autoloads/settings.gd"
 DialogueManager="*res://autoloads/dialogue_manager.tscn"
 CollisionLayers="*res://autoloads/collision_layers.gd"
+Progress="*res://autoloads/progress.gd"
 
 [display]
 
