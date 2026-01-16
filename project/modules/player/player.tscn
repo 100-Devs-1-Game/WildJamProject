@@ -145,6 +145,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 11
 script = ExtResource("1_hqo1x")
 friction = 10000.0
 bullet_scene = ExtResource("2_m7q0d")
