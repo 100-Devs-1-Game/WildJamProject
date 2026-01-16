@@ -123,7 +123,7 @@ animations = [{
 radius = 22.0
 height = 44.0
 
-[node name="DF_Ogre" type="CharacterBody2D" groups=["enemies"]]
+[node name="Ogre" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_tovsj")

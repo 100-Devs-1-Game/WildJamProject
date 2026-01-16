@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://chqkwco5216a2"]
 
-[ext_resource type="Script" path="res://modules/enemies/enemy.gd" id="1_g8jw3"]
+[ext_resource type="Script" uid="uid://cd82axkbb6h2v" path="res://modules/enemies/enemy.gd" id="1_g8jw3"]
 [ext_resource type="Texture2D" uid="uid://2bspddvpnnqn" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0000.png" id="2_a0yjh"]
 [ext_resource type="Texture2D" uid="uid://dlk87le4g1ikx" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0001.png" id="3_y8tff"]
 [ext_resource type="Texture2D" uid="uid://bxhvghaxj7vqb" path="res://assets/placeholder_enemy/attack/PlaceholderAttack0002.png" id="4_4p0d6"]
@@ -104,7 +104,7 @@ height = 110.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2e5bj"]
 
-[node name="DF-tatzelwurm" type="CharacterBody2D" groups=["enemies"]]
+[node name="tatzelwurm" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_g8jw3")
