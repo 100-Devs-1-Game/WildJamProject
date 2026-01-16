@@ -65,7 +65,7 @@ func _process(_delta: float) -> void:
 		shoulder.rotation = 0
 
 func _physics_process(delta: float) -> void:
-	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
+	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down").normalized()
 	# Since this is an isometric perspective, reduce vertical movement, assuming a 45 degree camera, the movement is halved
 	input_vector.y *= 0.5
 	var current_max_speed = walk_speed
