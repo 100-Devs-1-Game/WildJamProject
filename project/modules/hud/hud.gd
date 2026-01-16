@@ -1,5 +1,5 @@
+class_name Hud
 extends Node
-
 
 
 # a health bar
