@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MonsterDefinition" load_steps=3 format=3 uid="uid://cwrnk5u4qmequ"]
+
+[ext_resource type="PackedScene" uid="uid://chqkwco5216a2" path="res://modules/enemies/dark forest/tatzelwurm.tscn" id="1_h0t4b"]
+[ext_resource type="Script" uid="uid://dibw4ce3ggtur" path="res://modules/enemies/enemy_definition.gd" id="1_slefd"]
+
+[resource]
+script = ExtResource("1_slefd")
+scene = ExtResource("1_h0t4b")
+metadata/_custom_type_script = "uid://dibw4ce3ggtur"

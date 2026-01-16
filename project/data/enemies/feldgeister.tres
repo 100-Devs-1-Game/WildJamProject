@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MonsterDefinition" load_steps=3 format=3 uid="uid://q5y8t5bdh6un"]
+
+[ext_resource type="Script" uid="uid://dibw4ce3ggtur" path="res://modules/enemies/enemy_definition.gd" id="1_gquar"]
+[ext_resource type="PackedScene" uid="uid://d18ujattuvhhk" path="res://modules/enemies/dark forest/feldgeister.tscn" id="1_xmxga"]
+
+[resource]
+script = ExtResource("1_gquar")
+scene = ExtResource("1_xmxga")
+metadata/_custom_type_script = "uid://dibw4ce3ggtur"
