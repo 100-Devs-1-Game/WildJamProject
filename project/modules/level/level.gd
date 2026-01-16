@@ -21,6 +21,7 @@ func _ready() -> void:
 	build()
 	assert(player_scene)
 	var center := terrain.map_to_local(size / 2)
+	spawn_enemies()
 	spawn_player(terrain.map_to_local(find_nearest_walkable_tile(center)))
 	
 func init_signals():
@@ -59,6 +60,26 @@ func spawn_player(pos: Vector2):
 	player = player_scene.instantiate()
 	player.position = pos
 	add_child(player)
+
+func spawn_enemies():
+	var enemies: Array[EnemyDefinition]
+	var enemy_path := "res://data/enemies/"
+	for res_file in ResourceLoader.list_directory(enemy_path):
+		enemies.append(load(enemy_path + "/" + res_file))
+
+	for tile in terrain.get_used_cells():
+		if terrain.get_cell_source_id(tile) < BORDER_TILE_SOURCE_ID:
+			continue
+		for enemy in enemies:
+			if randf() * 100 < enemy.spawn_chance:
+				spawn_enemy(enemy, tile)
+				break
+
+func spawn_enemy(enemy_def: EnemyDefinition, tile: Vector2i):
+	assert(enemy_def.scene)
+	var enemy: MazeEnemy = enemy_def.scene.instantiate()
+	enemy.position= terrain.map_to_local(tile)
+	add_child(enemy)
 
 func spawn_items_from_corpse(enemy: MazeEnemy):
 	if not terrain:
