@@ -11,16 +11,8 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dyoe6"]
 texture = ExtResource("2_ngoot")
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar", "sanity_bar", "ammo_count_label", "weapon_hotbar")]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("health_bar", "sanity_bar", "ammo_count_label", "weapon_hotbar")]
+layer = 2
 script = ExtResource("1_lqyyi")
 health_bar = NodePath("HealthBar")
 sanity_bar = NodePath("SanityBar")
@@ -28,23 +20,19 @@ ammo_count_label = NodePath("AmmoCountLabel")
 weapon_hotbar = NodePath("WeaponHotbar")
 
 [node name="Panel" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -563.0
-offset_top = 397.00003
-offset_right = 1157.0
-offset_bottom = 597.00006
+anchor_bottom = 1.0
+offset_left = -602.0
+offset_top = -140.0
+offset_right = 602.0
 grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_dyoe6")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -61,7 +49,6 @@ texture_under = ExtResource("2_ugr31")
 texture_progress = ExtResource("3_ngoot")
 
 [node name="SanityBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -78,7 +65,6 @@ texture_under = ExtResource("4_dyoe6")
 texture_progress = ExtResource("5_nvutd")
 
 [node name="AmmoCountLabel" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -105,10 +91,7 @@ horizontal_alignment = 1
 autostart = true
 
 [node name="WeaponHotbar" parent="." instance=ExtResource("2_0vtu1")]
-layout_mode = 1
 offset_left = 256.0
 offset_top = 468.0
 offset_right = 256.0
 offset_bottom = 468.0
-
-[connection signal="timeout" from="DebuggingTimer" to="." method="_on_timer_timeout"]

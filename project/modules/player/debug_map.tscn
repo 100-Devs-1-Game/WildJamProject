@@ -47,8 +47,10 @@ attack_damage = 10
 attack_cooldown = 1.0
 is_ranged = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Hud" parent="CanvasLayer" instance=ExtResource("13_cychg")]
+[node name="Hud" parent="." instance=ExtResource("13_cychg")]
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
 
 [node name="PlayerInventory" parent="." instance=ExtResource("10_4gjip")]
