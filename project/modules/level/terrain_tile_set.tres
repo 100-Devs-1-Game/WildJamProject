@@ -1,9 +1,8 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://o8taylafv3nk"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://o8taylafv3nk"]
 
 [ext_resource type="Texture2D" uid="uid://wgxu371svj7a" path="res://assets/tilemap/dark_forest/ground_tile_forest.png" id="1_c27w2"]
 [ext_resource type="Texture2D" uid="uid://ddxbiuy8h5xfc" path="res://assets/tilemap/dark_forest/ground_tile_forest_2.png" id="2_wot7k"]
 [ext_resource type="Texture2D" uid="uid://cda1dv18ntql7" path="res://assets/tilemap/dark_forest/ground_tile_forest_3.png" id="3_qtvd6"]
-[ext_resource type="Texture2D" uid="uid://7462qckh0dm0" path="res://assets/tilemap/dark_forest/forest_border.png" id="4_qyqqg"]
 [ext_resource type="Texture2D" uid="uid://cx38e3i56ehqr" path="res://assets/tilemap/dark_forest/radio_tower.png" id="5_wot7k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xgu0i"]
@@ -21,13 +20,6 @@ texture = ExtResource("3_qtvd6")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8rxff"]
-texture = ExtResource("4_qyqqg")
-texture_region_size = Vector2i(256, 256)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
-0:0/0/custom_data_0 = true
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qtvd6"]
 texture = ExtResource("5_wot7k")
 texture_region_size = Vector2i(256, 256)
@@ -37,10 +29,7 @@ texture_region_size = Vector2i(256, 256)
 [resource]
 tile_size = Vector2i(256, 256)
 physics_layer_0/collision_layer = 2
-custom_data_layer_0/name = "border"
-custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_xgu0i")
 sources/1 = SubResource("TileSetAtlasSource_8t3po")
 sources/2 = SubResource("TileSetAtlasSource_g0o67")
-sources/3 = SubResource("TileSetAtlasSource_8rxff")
 sources/4 = SubResource("TileSetAtlasSource_qtvd6")

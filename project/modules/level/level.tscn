@@ -1,16 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs7lmwh0o3s0u"]
+[gd_scene load_steps=8 format=3 uid="uid://cs7lmwh0o3s0u"]
 
 [ext_resource type="Script" uid="uid://bdgvj6g6iojvq" path="res://modules/level/level.gd" id="1_lsyog"]
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="2_hetbt"]
 [ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="3_ktxx3"]
 [ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="4_hetbt"]
+[ext_resource type="Texture2D" uid="uid://7462qckh0dm0" path="res://assets/tilemap/dark_forest/forest_border.png" id="4_ktxx3"]
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("terrain")]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_es54h"]
+texture = ExtResource("4_ktxx3")
+texture_region_size = Vector2i(384, 384)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+
+[sub_resource type="TileSet" id="TileSet_m45tf"]
+tile_size = Vector2i(256, 256)
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_es54h")
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("terrain", "terrain_border")]
 script = ExtResource("1_lsyog")
 terrain = NodePath("Terrain")
+terrain_border = NodePath("Terrain Border")
 player_scene = ExtResource("2_hetbt")
 
 [node name="Terrain" type="TileMapLayer" parent="."]
 tile_set = ExtResource("3_ktxx3")
+
+[node name="Terrain Border" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_m45tf")
 
 [node name="Hud" parent="." instance=ExtResource("4_hetbt")]
