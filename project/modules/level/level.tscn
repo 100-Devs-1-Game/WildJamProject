@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs7lmwh0o3s0u"]
+[gd_scene load_steps=9 format=3 uid="uid://cs7lmwh0o3s0u"]
 
 [ext_resource type="Script" uid="uid://bdgvj6g6iojvq" path="res://modules/level/level.gd" id="1_lsyog"]
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="2_hetbt"]
+[ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="3_es54h"]
 [ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="3_ktxx3"]
 [ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="4_hetbt"]
 [ext_resource type="Texture2D" uid="uid://7462qckh0dm0" path="res://assets/tilemap/dark_forest/forest_border.png" id="4_ktxx3"]
@@ -30,3 +31,16 @@ tile_set = ExtResource("3_ktxx3")
 tile_set = SubResource("TileSet_m45tf")
 
 [node name="Hud" parent="." instance=ExtResource("4_hetbt")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugSceneChangeButton" parent="CanvasLayer" instance=ExtResource("3_es54h")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -410.0
+offset_bottom = 48.0
+grow_horizontal = 0
+grow_vertical = 1
+text = "Return to Skyscraper"
+targetScene = 1
