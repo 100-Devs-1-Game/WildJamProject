@@ -14,4 +14,7 @@ name = "Android Arm"
 flavor = "Fresh from the press!"
 icon = SubResource("AtlasTexture_g8oi5")
 icon_variants = 10
+icon_variants_x = 10
+icon_variants_y = 1
+current_icon_variant = 1
 metadata/_custom_type_script = "uid://yngljnvn1p5e"

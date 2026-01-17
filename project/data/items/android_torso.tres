@@ -14,5 +14,7 @@ name = "Android Torso"
 flavor = "Factory Grade"
 icon = SubResource("AtlasTexture_5td40")
 icon_variants = 10
+icon_variants_x = 10
+icon_variants_y = 1
 current_icon_variant = 1
 metadata/_custom_type_script = "uid://de1n1kpgq7enk"

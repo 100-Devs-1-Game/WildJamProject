@@ -94,7 +94,9 @@ func spawn_items_from_corpse(enemy: MazeEnemy):
 func spawn_items(item_num: int):
 	for i in item_num:
 		var coords = terrain.get_used_cells().pick_random()
-		spawn_item(coords, item_library.pick_random())
+		var random_item = item_library.pick_random().duplicate()
+		random_item.randomize()
+		spawn_item(coords, random_item)
 
 
 func spawn_item(coords: Vector2i, item_structure: Item):

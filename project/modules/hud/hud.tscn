@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cvmp0ryajvp3t" path="res://modules/hud/hud.gd" id="1_lqyyi"]
 [ext_resource type="PackedScene" uid="uid://bp0g5k1my0alh" path="res://modules/hud/weapon_hotbar.tscn" id="2_0vtu1"]
-[ext_resource type="Texture2D" uid="uid://d04pxnbf0kfk1" path="res://assets/ui/hudbg.png" id="2_ngoot"]
+[ext_resource type="StyleBox" uid="uid://dc7xhnn4v2y3" path="res://modules/hud/panel_style.tres" id="2_dyoe6"]
 [ext_resource type="Texture2D" uid="uid://ddd8fvc1xsoag" path="res://assets/ui/hpunder.png" id="2_ugr31"]
 [ext_resource type="Texture2D" uid="uid://kd2mpt203pmv" path="res://assets/ui/hpprogress.png" id="3_ngoot"]
 [ext_resource type="Texture2D" uid="uid://dnircu0tqachx" path="res://assets/ui/sanunder.png" id="4_dyoe6"]
 [ext_resource type="Texture2D" uid="uid://i6ntlb4phfst" path="res://assets/ui/sanprogress.png" id="5_nvutd"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dyoe6"]
-texture = ExtResource("2_ngoot")
+[ext_resource type="PackedScene" uid="uid://dru8puxo6flwq" path="res://modules/player/player_doll.tscn" id="8_dyoe6"]
 
 [node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("health_bar", "sanity_bar", "ammo_count_label", "weapon_hotbar")]
 layer = 2
@@ -30,7 +28,7 @@ offset_top = -140.0
 offset_right = 602.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_dyoe6")
+theme_override_styles/panel = ExtResource("2_dyoe6")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 anchors_preset = 8
@@ -95,3 +93,5 @@ offset_left = 256.0
 offset_top = 468.0
 offset_right = 256.0
 offset_bottom = 468.0
+
+[node name="PlayerDoll" parent="." instance=ExtResource("8_dyoe6")]

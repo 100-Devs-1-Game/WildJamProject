@@ -32,6 +32,7 @@ extends CharacterBody2D
 
 # health
 @export var max_health := 100
+var is_doll := false
 var health := max_health
 var invincible := false
 
@@ -44,15 +45,41 @@ var target_enemy: Node2D
 
 func _ready() -> void:
 	bullet_timer.wait_time= shoot_rate
-	_post_ready.call_deferred() 
+	_post_ready.call_deferred()
+	_update_player_textures()
+	Signals.inventory_updated.connect(_update_player_textures)
 	
 func _post_ready():
+	if is_doll:
+		return
 	# ensure the HUD is fully loaded before setting the initial values
 	Signals.change_ammo_count_value.emit(ammo, max_ammo)
 	Signals.change_health_value.emit(health, max_health)
+
+func _update_player_textures():
+	$Model/Leg.texture = null
+	if PlayerInventory.equipped_legs:
+		$Model/Leg.texture = PlayerInventory.equipped_legs.get_2d_texture()
 	
+	$Model/Torso.texture = null
+	if PlayerInventory.equipped_torso:
+		$Model/Torso.texture = PlayerInventory.equipped_torso.get_2d_texture()
+	
+	$Model/Shoulder/Arm.texture = null
+	if PlayerInventory.equipped_arm:
+		$Model/Shoulder/Arm.texture = PlayerInventory.equipped_arm.get_2d_texture()
+	
+	$Model/Shoulder/Arm/Weapon/Sprite2D.texture = null
+	if PlayerInventory.equipped_weapon:
+		$Model/Shoulder/Arm/Weapon/Sprite2D.texture = PlayerInventory.equipped_weapon.get_2d_texture()
+	
+	$Model/Head.texture = null
+	if PlayerInventory.equipped_head:
+		$Model/Head.texture = PlayerInventory.equipped_head.get_2d_texture()
 
 func _process(_delta: float) -> void:
+	if is_doll:
+		return
 	var looking_right := global_position.x < get_global_mouse_position().x
 	model.scale.x = model_scale if looking_right else -model_scale 
 	
@@ -65,6 +92,8 @@ func _process(_delta: float) -> void:
 		shoulder.rotation = 0
 
 func _physics_process(delta: float) -> void:
+	if is_doll:
+		return
 	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down").normalized()
 	# Since this is an isometric perspective, reduce vertical movement, assuming a 45 degree camera, the movement is halved
 	input_vector.y *= 0.5
@@ -109,6 +138,8 @@ func shoot():
 	bullet_timer.start()
 
 func _on_bullet_timer_timeout() -> void:
+	if is_doll:
+		return
 	if ammo <= 0:
 		return
 	ammo -= 1
@@ -145,7 +176,7 @@ func pickup_item(item: Item):
 
 # Take damage
 func take_damage(amount: int):
-	if invincible:
+	if invincible or is_doll:
 		return
 	
 	health -= amount
@@ -157,10 +188,6 @@ func take_damage(amount: int):
 		queue_free()
 	else:
 		start_iframes()
-		
-		
-		
-		
 
 # Toggle iframes
 func start_iframes():

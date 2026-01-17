@@ -5,12 +5,13 @@ extends Control
 @onready var weapon_slot_scene: PackedScene = preload("res://modules/hud/weapon_slot.tscn")
 
 func _ready() -> void:
-	Signals.weapon_update.connect(populate_hotbar)
+	Signals.inventory_updated.connect(populate_hotbar)
 
 # Populate the hotbar with all items in same order
-func populate_hotbar(weapons: Array[Weapon]) -> void:
-	for idx in min(len(weapons), len(weapons_hotbar_list.get_children())):
-		weapons_hotbar_list.get_child(idx).get_node("SlotImage").texture = weapons[idx].icon
+func populate_hotbar() -> void:
+	var inventory = PlayerInventory.inventory.keys()
+	for idx in min(len(inventory), len(weapons_hotbar_list.get_children())):
+		weapons_hotbar_list.get_child(idx).get_node("SlotImage").texture = inventory[idx].get_2d_texture()
 	select_item(0)
 
 # Hightlight the currentlty selected item by showing a frame around it

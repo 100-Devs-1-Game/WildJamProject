@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://bij2gt0m1r71w"]
+[gd_scene load_steps=9 format=4 uid="uid://bij2gt0m1r71w"]
 
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="1_5ydlk"]
 [ext_resource type="Script" uid="uid://b1clykhmyy28s" path="res://modules/player/debug_map.gd" id="1_cychg"]
 [ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="2_gsm8h"]
 [ext_resource type="Texture2D" uid="uid://cum3y5bgg7gjx" path="res://assets/tilemap/dark_forest/boulder_3.png" id="6_cychg"]
-[ext_resource type="PackedScene" uid="uid://dru8puxo6flwq" path="res://modules/player/player_inventory.tscn" id="10_4gjip"]
 [ext_resource type="PackedScene" uid="uid://833q7u8hgfk5" path="res://modules/enemies/enemy.tscn" id="11_ud308"]
 [ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="13_cychg"]
 
@@ -48,9 +47,3 @@ attack_cooldown = 1.0
 is_ranged = true
 
 [node name="Hud" parent="." instance=ExtResource("13_cychg")]
-offset_left = 960.0
-offset_top = 540.0
-offset_right = 960.0
-offset_bottom = 540.0
-
-[node name="PlayerInventory" parent="." instance=ExtResource("10_4gjip")]

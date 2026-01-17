@@ -5,12 +5,17 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_om2kc"]
 atlas = ExtResource("1_8elga")
-region = Rect2(0, 14, 48, 14)
+region = Rect2(0, 0, 48, 14)
 
 [resource]
 script = ExtResource("2_wyvwt")
 name = "Polearm"
 flavor = "Stay away from me!"
 icon = SubResource("AtlasTexture_om2kc")
+icon_variants = 3
+icon_variants_x = 1
+icon_variants_y = 3
+current_icon_variant = 1
+fixed_icon_variant = 3
 model_name = "TOR01"
 metadata/_custom_type_script = "uid://cd87etkkjjin8"

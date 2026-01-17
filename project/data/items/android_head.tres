@@ -14,5 +14,7 @@ name = "Android Head"
 flavor = "Central processing"
 icon = SubResource("AtlasTexture_muex4")
 icon_variants = 4
+icon_variants_x = 4
+icon_variants_y = 1
 current_icon_variant = 1
 metadata/_custom_type_script = "uid://de1n1kpgq7enk"
