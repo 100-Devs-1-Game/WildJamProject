@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5pa0fut3q2ha"]
+
+[ext_resource type="Theme" uid="uid://c7ewp0647v5ek" path="res://assets/menu_theme.tres" id="1_iej6b"]
+[ext_resource type="Texture2D" uid="uid://b5o2ow0t7g3dt" path="res://assets/ui/creditsbg.png" id="1_qf25l"]
+[ext_resource type="Script" uid="uid://3ivv6xwkwrwv" path="res://modules/menus/credits.gd" id="2_iej6b"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_iej6b")
+script = ExtResource("2_iej6b")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qf25l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 700
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 700
+theme_override_constants/margin_bottom = 128
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "Lead Game Designer
+- Codimon
+
+2D Artist
+- Astenra
+- CheddaNinja
+- Vivien Lulkowski
+
+3D Artist
+- CRYPTCRATE
+
+Game Designer
+- John Tran
+
+Programmer
+- Cdw849
+- Chaak (Amirtha Krishnan)
+- CheddaNinja
+- Codimon
+- Josep Valls
+- Kylen Xiao
+- Victor Hugo Souza
+- niconorsk"
+fit_content = true
+
+[node name="ReturnButton" type="Button" parent="."]
+custom_minimum_size = Vector2(262, 103)
+layout_mode = 0
+offset_left = 1435.0001
+offset_top = 907.0001
+offset_right = 1697.0001
+offset_bottom = 1010.0001
+rotation = -0.06648167
+text = "RETURN"
+
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

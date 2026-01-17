@@ -1,11 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkoc5mebfrp4f"]
+[gd_scene load_steps=7 format=4 uid="uid://dkoc5mebfrp4f"]
 
 [ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_pdoo8"]
+[ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="2_6njhd"]
+[ext_resource type="Texture2D" uid="uid://cum3y5bgg7gjx" path="res://assets/tilemap/dark_forest/boulder_3.png" id="3_s40l3"]
+[ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="4_wn0jv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f20yh"]
+texture = ExtResource("3_s40l3")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8duki"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_f20yh")
 
 [node name="TowerHub" type="Node"]
 
 [node name="DebugSceneChangeButton" parent="." instance=ExtResource("1_pdoo8")]
-offset_right = -1792.0
-offset_bottom = -1032.0
+offset_left = 1134.0
+offset_top = 521.0
+offset_right = -492.0
+offset_bottom = -475.0
 text = "Go To Level"
 targetScene = 2
+
+[node name="Terrain" type="TileMapLayer" parent="."]
+z_index = -1
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAwAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAADAAIAAwAAAAAAAAACAAIAAwAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAA=")
+tile_set = ExtResource("2_6njhd")
+
+[node name="Props" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAADAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_8duki")
+
+[node name="Player" parent="." instance=ExtResource("4_wn0jv")]
+position = Vector2(467, 554)

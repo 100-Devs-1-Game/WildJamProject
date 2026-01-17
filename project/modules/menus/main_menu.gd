@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 func _on_play_button_pressed() -> void:
-	pass
+	SceneManager.load_hub_scene()
 
 
 func _on_settings_button_pressed() -> void:
@@ -15,7 +15,7 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_credits_button_pressed() -> void:
-	pass
+	SceneManager.load_credits_scene()
 
 
 func _on_quit_button_pressed() -> void:
