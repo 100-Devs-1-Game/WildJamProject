@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://4roanyas8j71" path="res://modules/menus/main_menu.tscn" id="2_theb1"]
 [ext_resource type="PackedScene" uid="uid://dkoc5mebfrp4f" path="res://scenes/tower_hub.tscn" id="3_cqtie"]
 [ext_resource type="PackedScene" uid="uid://b5pa0fut3q2ha" path="res://modules/menus/credits.tscn" id="3_mgtr3"]
-[ext_resource type="PackedScene" uid="uid://c1st86pxs1fwe" path="res://scenes/game.tscn" id="4_mgtr3"]
+[ext_resource type="PackedScene" uid="uid://cs7lmwh0o3s0u" path="res://modules/level/level.tscn" id="5_cqtie"]
 
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_bjvek")
 main_menu_scene = ExtResource("2_theb1")
 credits_scene = ExtResource("3_mgtr3")
 hub_scene = ExtResource("3_cqtie")
-game_scene = ExtResource("4_mgtr3")
+game_scene = ExtResource("5_cqtie")
