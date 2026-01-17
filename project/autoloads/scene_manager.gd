@@ -5,6 +5,7 @@ var current_scene: Node = null
 
 ## --- export vars ---
 @export var main_menu_scene: PackedScene
+@export var credits_scene: PackedScene
 @export var hub_scene: PackedScene
 @export var game_scene: PackedScene
 
@@ -44,3 +45,7 @@ func load_hub_scene():
 ## Loads the main menu scene
 func load_main_menu_scene():
 	change_room(main_menu_scene)
+	
+## Loads the cradits scene
+func load_credits_scene():
+	change_room(credits_scene)

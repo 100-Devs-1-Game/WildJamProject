@@ -20,10 +20,10 @@ sources/0 = SubResource("TileSetAtlasSource_kvuet")
 [node name="Game" type="Node"]
 
 [node name="DebugSceneChangeButton" parent="." instance=ExtResource("1_80nbo")]
-offset_left = 5.0
-offset_top = 803.0
-offset_right = -1745.0
-offset_bottom = -229.0
+offset_left = 738.0
+offset_top = 860.0
+offset_right = -735.0
+offset_bottom = -153.0
 text = "Return to Skyscraper"
 targetScene = 1
 

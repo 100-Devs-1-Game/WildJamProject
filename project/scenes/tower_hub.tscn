@@ -17,10 +17,10 @@ sources/0 = SubResource("TileSetAtlasSource_f20yh")
 [node name="TowerHub" type="Node"]
 
 [node name="DebugSceneChangeButton" parent="." instance=ExtResource("1_pdoo8")]
-offset_left = 1301.0
-offset_top = 509.0
-offset_right = -491.0
-offset_bottom = -523.0
+offset_left = 1134.0
+offset_top = 521.0
+offset_right = -492.0
+offset_bottom = -475.0
 text = "Go To Level"
 targetScene = 2
 

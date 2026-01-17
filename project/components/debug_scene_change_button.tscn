@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://4ctkx7p3f50k"]
+[gd_scene load_steps=3 format=3 uid="uid://4ctkx7p3f50k"]
 
+[ext_resource type="Theme" uid="uid://c7ewp0647v5ek" path="res://assets/menu_theme.tres" id="1_oq7jv"]
 [ext_resource type="Script" uid="uid://dxradmginmd1r" path="res://components/debug_scene_change_button.gd" id="1_symkv"]
 
 [node name="DebugSceneChangeButton" type="Button"]
@@ -8,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_oq7jv")
 text = "Go To"
 script = ExtResource("1_symkv")
 
