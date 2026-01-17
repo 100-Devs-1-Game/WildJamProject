@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cx38e3i56ehqr"
-path="res://.godot/imported/radio_tower.png-2e5225e889b0df4db9f33e0b5be3c9f0.ctex"
+uid="uid://gfk1xxf521m3"
+path="res://.godot/imported/radio_tower_sheet.png-6af50f0c3b5c9aad65c7fd6497f6bfb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilemap/dark_forest/radio_tower.png"
-dest_files=["res://.godot/imported/radio_tower.png-2e5225e889b0df4db9f33e0b5be3c9f0.ctex"]
+source_file="res://assets/tilemap/dark_forest/radio_tower_sheet.png"
+dest_files=["res://.godot/imported/radio_tower_sheet.png-6af50f0c3b5c9aad65c7fd6497f6bfb2.ctex"]
 
 [params]
 
