@@ -24,12 +24,14 @@ func _process(_delta: float) -> void:
 ## Changes the room
 func change_room(scene: PackedScene) -> void:
 	# Remove current room
-	if current_scene and is_instance_valid(current_scene):
-		current_scene.queue_free()
-		
-	# Load new room
-	current_scene = scene.instantiate()
-	add_child(current_scene)
+	#if current_scene and is_instance_valid(current_scene):
+		#current_scene.queue_free()
+		#
+	## Load new room
+	#current_scene = scene.instantiate()
+	#add_child(current_scene)
+	
+	get_tree().change_scene_to_packed.call_deferred(scene)
 	
 	# Send signal
 	Signals.scene_change.emit()
