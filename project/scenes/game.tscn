@@ -1,13 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1st86pxs1fwe"]
+[gd_scene load_steps=10 format=4 uid="uid://c1st86pxs1fwe"]
 
 [ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_80nbo"]
+[ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="2_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://cum3y5bgg7gjx" path="res://assets/tilemap/dark_forest/boulder_3.png" id="3_gee14"]
+[ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="4_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://833q7u8hgfk5" path="res://modules/enemies/enemy.tscn" id="5_vtaks"]
+[ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="6_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://dru8puxo6flwq" path="res://modules/player/player_inventory.tscn" id="7_dinhu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kvuet"]
+texture = ExtResource("3_gee14")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_trtic"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_kvuet")
 
 [node name="Game" type="Node"]
 
 [node name="DebugSceneChangeButton" parent="." instance=ExtResource("1_80nbo")]
 offset_left = 5.0
-offset_top = 6.0
+offset_top = 803.0
 offset_right = -1745.0
-offset_bottom = -1026.0
+offset_bottom = -229.0
 text = "Return to Skyscraper"
 targetScene = 1
+
+[node name="Terrain" type="TileMapLayer" parent="."]
+z_index = -1
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAwAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAADAAIAAwAAAAAAAAACAAIAAwAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAA=")
+tile_set = ExtResource("2_u5sy4")
+
+[node name="Props" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAADAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_trtic")
+
+[node name="Player" parent="." instance=ExtResource("4_0tnpc")]
+position = Vector2(467, 554)
+
+[node name="Enemy" parent="." instance=ExtResource("5_vtaks")]
+position = Vector2(1368, 507)
+
+[node name="RangedEnemy" parent="." instance=ExtResource("5_vtaks")]
+position = Vector2(1614, 506)
+scale = Vector2(0.8, 0.8)
+attack_damage = 10
+attack_cooldown = 1.0
+is_ranged = true
+
+[node name="Hud" parent="." instance=ExtResource("6_kvpfn")]
+
+[node name="PlayerInventory" parent="." instance=ExtResource("7_dinhu")]
