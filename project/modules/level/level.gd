@@ -2,12 +2,13 @@ class_name Level
 extends Node2D
 
 const CORPSE_ITEM_COUNT = 5
-const BORDER_TILE_SOURCE_ID = 3
+const NUM_GRASS_VARIATIONS = 3
 const SAFE_ZONE_SOURCE_ID = 4
 
 @export var size: Vector2i = Vector2i(50, 50)
 
 @export var terrain: TileMapLayer
+@export var terrain_border: TileMapLayer
 @export var player_scene: PackedScene
 
 var item_library = []
@@ -42,7 +43,9 @@ func build():
 		for y in size.y:
 			var walkable: bool = MazeGenerator.map[x][y]
 			var pos := Vector2i(x, y)
-			terrain.set_cell(pos, randi() % BORDER_TILE_SOURCE_ID if walkable else BORDER_TILE_SOURCE_ID, Vector2.ZERO)
+			terrain.set_cell(pos, randi() % NUM_GRASS_VARIATIONS, Vector2.ZERO)
+			if not walkable:
+				terrain_border.set_cell(pos, 0, Vector2i.ZERO)
 
 	for tile in safezones:
 		terrain.set_cell(tile, SAFE_ZONE_SOURCE_ID, Vector2i.ZERO)
@@ -50,7 +53,7 @@ func build():
 func find_nearest_walkable_tile(pos: Vector2)-> Vector2i:
 	var nearest = null
 	for tile in terrain.get_used_cells():
-		if terrain.get_cell_tile_data(tile).get_custom_data("border"):
+		if tile in terrain_border.get_used_cells():
 			continue
 		if not nearest or pos.distance_to(terrain.map_to_local(tile)) < pos.distance_to(terrain.map_to_local(nearest)):  
 			nearest= tile
@@ -68,7 +71,7 @@ func spawn_enemies():
 		enemies.append(load(enemy_path + "/" + res_file))
 
 	for tile in terrain.get_used_cells():
-		if terrain.get_cell_source_id(tile) < BORDER_TILE_SOURCE_ID:
+		if tile in terrain_border.get_used_cells():
 			continue
 		for enemy in enemies:
 			if randf() * 100 < enemy.spawn_chance:
