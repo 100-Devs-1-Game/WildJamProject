@@ -7,7 +7,9 @@ func _ready() -> void:
 	init_signals()
 	
 	item_library = []
-	for i in PlayerInventory.item_library:
-		item_library.append(load(i))
+	for items in PlayerInventory.item_library.values():
+		for i in items:
+			item_library.append(load(i))
 	if terrain:
 		spawn_items(item_num)
+	PlayerInventory.generate_new_android_inventory()

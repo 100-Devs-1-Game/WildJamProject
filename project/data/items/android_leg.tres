@@ -13,5 +13,7 @@ name = "Android Legs"
 flavor = "Fabricator Quality"
 icon = SubResource("AtlasTexture_p281a")
 icon_variants = 7
+icon_variants_x = 1
+icon_variants_y = 7
 current_icon_variant = 1
 metadata/_custom_type_script = "uid://yngljnvn1p5e"
