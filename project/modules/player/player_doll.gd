@@ -1,13 +1,11 @@
 class_name  PlayerDoll
 extends Node2D
 
-
 func _ready() -> void:
 	hide()
 	_update_icons()
 	Signals.inventory_updated.connect(_update_icons)
-	$Player.is_doll = true
-	$Player/Model/Leg.frame = 3
+	PlayerInventory.generate_new_android_inventory_if_empty()
 	
 
 func _on_generate_pressed() -> void:

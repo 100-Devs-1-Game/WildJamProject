@@ -20,6 +20,7 @@ const item_library = {
 	],
 }
 
+var flattened_item_library: Array[Item]
 var inventory: Dictionary[Item, int]
 var equipped_head: Upgrade
 var equipped_torso: Upgrade
@@ -30,7 +31,10 @@ var equipped_weapon: Weapon
 
 func _ready() -> void:
 	Signals.item_picked_up.connect(add_item.bind(1))
-	
+	for item_scenes in item_library.values():
+		for item_scene in item_scenes:
+			flattened_item_library.append(load(item_scene))
+	print(flattened_item_library)
 
 func generate_new_android_inventory() -> void:
 	equipped_head = load(item_library["heads"].pick_random()).duplicate()
@@ -41,11 +45,13 @@ func generate_new_android_inventory() -> void:
 	equipped_legs.randomize()
 	equipped_arm = load(item_library["arms"].pick_random()).duplicate()
 	equipped_arm.randomize()
-	var new_weapon = item_library["weapons"].pick_random()
-	print(new_weapon)
-	equipped_weapon = load(new_weapon).duplicate()
+	equipped_weapon = load(item_library["weapons"].pick_random()).duplicate()
 	equipped_weapon.randomize()
 	Signals.inventory_updated.emit()
+
+func generate_new_android_inventory_if_empty() -> void:
+	if not (equipped_head and equipped_arm and equipped_torso and equipped_legs and equipped_weapon):
+		generate_new_android_inventory()
 	
 
 func add_item(item: Item, count: int) -> void:

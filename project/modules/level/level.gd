@@ -11,7 +11,6 @@ const SAFE_ZONE_SOURCE_ID = 4
 @export var terrain_border: TileMapLayer
 @export var player_scene: PackedScene
 
-var item_library = []
 var player: IsometricPlayer
 var safezones: Array[Vector2i]
 
@@ -89,12 +88,14 @@ func spawn_items_from_corpse(enemy: MazeEnemy):
 		return
 	var coords = terrain.local_to_map(terrain.to_local(enemy.position)) 
 	for i in CORPSE_ITEM_COUNT:
-		spawn_item(coords, item_library.pick_random())
+		var random_item = PlayerInventory.flattened_item_library.pick_random().duplicate()
+		random_item.randomize()
+		spawn_item(coords, random_item)
 
 func spawn_items(item_num: int):
 	for i in item_num:
 		var coords = terrain.get_used_cells().pick_random()
-		var random_item = item_library.pick_random().duplicate()
+		var random_item = PlayerInventory.flattened_item_library.pick_random().duplicate()
 		random_item.randomize()
 		spawn_item(coords, random_item)
 

@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://dkoc5mebfrp4f"]
+[gd_scene load_steps=9 format=4 uid="uid://dkoc5mebfrp4f"]
 
 [ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_pdoo8"]
+[ext_resource type="Script" uid="uid://clnar1p6p5eii" path="res://scenes/tower_hub.gd" id="1_wn0jv"]
 [ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="2_6njhd"]
 [ext_resource type="Texture2D" uid="uid://cum3y5bgg7gjx" path="res://assets/tilemap/dark_forest/boulder_3.png" id="3_s40l3"]
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="4_wn0jv"]
+[ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="5_s40l3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f20yh"]
 texture = ExtResource("3_s40l3")
@@ -15,6 +17,7 @@ tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_f20yh")
 
 [node name="TowerHub" type="Node"]
+script = ExtResource("1_wn0jv")
 
 [node name="DebugSceneChangeButton" parent="." instance=ExtResource("1_pdoo8")]
 offset_left = 1134.0
@@ -38,3 +41,5 @@ tile_set = SubResource("TileSet_8duki")
 
 [node name="Player" parent="." instance=ExtResource("4_wn0jv")]
 position = Vector2(467, 554)
+
+[node name="Hud" parent="." instance=ExtResource("5_s40l3")]
