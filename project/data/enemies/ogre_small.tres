@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDefinition" load_steps=3 format=3 uid="uid://21pcxyyw7mk2"]
+[gd_resource type="Resource" script_class="EnemyDefinition" load_steps=3 format=3 uid="uid://21pcxyyw7mk2"]
 
 [ext_resource type="PackedScene" uid="uid://wpdgyildn8tv" path="res://modules/enemies/dark forest/ogre_small.tscn" id="1_he8ge"]
 [ext_resource type="Script" uid="uid://dibw4ce3ggtur" path="res://modules/enemies/enemy_definition.gd" id="2_fs0m4"]

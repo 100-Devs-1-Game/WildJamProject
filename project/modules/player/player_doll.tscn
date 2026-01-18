@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dru8puxo6flwq"]
 
 [ext_resource type="Script" uid="uid://dscxkjc42rhx7" path="res://modules/player/player_doll.gd" id="1_kt1ex"]
-[ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="2_8em2e"]
 [ext_resource type="StyleBox" uid="uid://dc7xhnn4v2y3" path="res://modules/hud/panel_style.tres" id="2_iuwr6"]
+[ext_resource type="PackedScene" uid="uid://bj8pthsq0pi4w" path="res://modules/player/player_model.tscn" id="3_iuwr6"]
 [ext_resource type="PackedScene" uid="uid://dxom55xj78atn" path="res://modules/hud/weapon_slot.tscn" id="3_qjnmt"]
 
 [node name="PlayerDoll" type="Node2D"]
@@ -21,14 +21,12 @@ offset_right = 640.0
 offset_bottom = 768.0
 theme_override_styles/panel = ExtResource("2_iuwr6")
 
+[node name="Model" parent="." instance=ExtResource("3_iuwr6")]
+
 [node name="Generate" type="Button" parent="."]
 offset_right = 260.0
 offset_bottom = 31.0
 text = "Generate new android inventory"
-
-[node name="Player" parent="." instance=ExtResource("2_8em2e")]
-position = Vector2(320, 512)
-scale = Vector2(3, 3)
 
 [node name="Weapon" parent="." instance=ExtResource("3_qjnmt")]
 offset_left = 128.0

@@ -23,16 +23,15 @@ extends CharacterBody2D
 @export var shoot_rate: float = 1
 
 @onready var bullet_timer: Timer = $BulletTimer
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var animation_player: AnimationPlayer = $Model.get_node("AnimationPlayer")
 @onready var model: Node2D = $Model
 # the model assets are tiny, it'll be scaled up by default
 @onready var model_scale: float = model.scale.x
-@onready var shoulder: Node2D = %Shoulder
+@onready var shoulder: Node2D = $Model.get_node("Shoulder")
 
 
 # health
 @export var max_health := 100
-var is_doll := false
 var health := max_health
 var invincible := false
 
@@ -50,8 +49,6 @@ func _ready() -> void:
 	Signals.inventory_updated.connect(_update_player_textures)
 	
 func _post_ready():
-	if is_doll:
-		return
 	# ensure the HUD is fully loaded before setting the initial values
 	Signals.change_ammo_count_value.emit(ammo, max_ammo)
 	Signals.change_health_value.emit(health, max_health)
@@ -78,8 +75,6 @@ func _update_player_textures():
 		$Model/Head.texture = PlayerInventory.equipped_head.get_2d_texture()
 
 func _process(_delta: float) -> void:
-	if is_doll:
-		return
 	var looking_right := global_position.x < get_global_mouse_position().x
 	model.scale.x = model_scale if looking_right else -model_scale 
 	
@@ -92,8 +87,6 @@ func _process(_delta: float) -> void:
 		shoulder.rotation = 0
 
 func _physics_process(delta: float) -> void:
-	if is_doll:
-		return
 	var input_vector = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down").normalized()
 	# Since this is an isometric perspective, reduce vertical movement, assuming a 45 degree camera, the movement is halved
 	input_vector.y *= 0.5
@@ -138,8 +131,6 @@ func shoot():
 	bullet_timer.start()
 
 func _on_bullet_timer_timeout() -> void:
-	if is_doll:
-		return
 	if ammo <= 0:
 		return
 	ammo -= 1
@@ -176,7 +167,7 @@ func pickup_item(item: Item):
 
 # Take damage
 func take_damage(amount: int):
-	if invincible or is_doll:
+	if invincible:
 		return
 	
 	health -= amount

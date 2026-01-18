@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c1st86pxs1fwe"]
+[gd_scene load_steps=9 format=4 uid="uid://c1st86pxs1fwe"]
 
 [ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_80nbo"]
 [ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="2_u5sy4"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="4_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://833q7u8hgfk5" path="res://modules/enemies/enemy.tscn" id="5_vtaks"]
 [ext_resource type="PackedScene" uid="uid://6s5vq2qeopxv" path="res://modules/hud/hud.tscn" id="6_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://dru8puxo6flwq" path="res://modules/player/player_inventory.tscn" id="7_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kvuet"]
 texture = ExtResource("3_gee14")
@@ -53,5 +52,3 @@ attack_cooldown = 1.0
 is_ranged = true
 
 [node name="Hud" parent="." instance=ExtResource("6_kvpfn")]
-
-[node name="PlayerInventory" parent="." instance=ExtResource("7_dinhu")]
