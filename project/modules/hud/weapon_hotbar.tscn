@@ -31,29 +31,29 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WeaponSlot" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot2" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot2" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot3" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot3" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot4" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot4" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot5" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot5" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot6" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot6" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot7" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot7" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot8" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot8" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2
 
-[node name="WeaponSlot9" parent="HBoxContainer" instance=ExtResource("2_1ysuv")]
+[node name="WeaponSlot9" parent="HBoxContainer" groups=["inventory_slots"] instance=ExtResource("2_1ysuv")]
 layout_mode = 2

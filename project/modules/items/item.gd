@@ -22,10 +22,11 @@ func randomize():
 		current_icon_variant = randi_range(1, icon_variants)
 
 func get_2d_texture() -> AtlasTexture:
+	var new_icon := icon.duplicate()
 	var icon_variant = current_icon_variant
 	if fixed_icon_variant:
 		icon_variant = fixed_icon_variant
-	icon.region.position.x = icon.region.size.x * ((icon_variant - 1) % icon_variants_x) 
-	icon.region.position.y = icon.region.size.y * ((icon_variant - 1) % icon_variants_y)
-	return icon
+	new_icon.region.position.x = icon.region.size.x * ((icon_variant - 1) % icon_variants_x) 
+	new_icon.region.position.y = icon.region.size.y * ((icon_variant - 1) % icon_variants_y)
+	return new_icon
 	

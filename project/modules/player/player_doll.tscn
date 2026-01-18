@@ -28,31 +28,31 @@ offset_right = 260.0
 offset_bottom = 31.0
 text = "Generate new android inventory"
 
-[node name="Weapon" parent="." instance=ExtResource("3_qjnmt")]
+[node name="Weapon" parent="." groups=["weapon_slot"] instance=ExtResource("3_qjnmt")]
 offset_left = 128.0
 offset_top = 512.0
 offset_right = 192.0
 offset_bottom = 576.0
 
-[node name="Legs" parent="." instance=ExtResource("3_qjnmt")]
+[node name="Legs" parent="." groups=["legs_slot"] instance=ExtResource("3_qjnmt")]
 offset_left = 128.0
 offset_top = 640.0
 offset_right = 192.0
 offset_bottom = 704.0
 
-[node name="Head" parent="." instance=ExtResource("3_qjnmt")]
+[node name="Head" parent="." groups=["head_slot"] instance=ExtResource("3_qjnmt")]
 offset_left = 128.0
 offset_top = 128.0
 offset_right = 192.0
 offset_bottom = 192.0
 
-[node name="Torso" parent="." instance=ExtResource("3_qjnmt")]
+[node name="Torso" parent="." groups=["torso_slot"] instance=ExtResource("3_qjnmt")]
 offset_left = 128.0
 offset_top = 256.0
 offset_right = 192.0
 offset_bottom = 320.0
 
-[node name="Arm" parent="." instance=ExtResource("3_qjnmt")]
+[node name="Arm" parent="." groups=["arm_slot"] instance=ExtResource("3_qjnmt")]
 offset_left = 128.0
 offset_top = 384.0
 offset_right = 192.0
