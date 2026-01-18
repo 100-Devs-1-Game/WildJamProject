@@ -11,7 +11,7 @@ func _ready() -> void:
 func populate_hotbar() -> void:
 	var inventory = PlayerInventory.inventory.keys()
 	for idx in min(len(inventory), len(weapons_hotbar_list.get_children())):
-		weapons_hotbar_list.get_child(idx).get_node("SlotImage").texture = inventory[idx].get_2d_texture()
+		weapons_hotbar_list.get_child(idx).item = inventory[idx]
 	select_item(0)
 
 # Hightlight the currentlty selected item by showing a frame around it
@@ -22,4 +22,4 @@ func select_item(idx: int) -> void:
 
 # Change out an item on certain idx
 func change_item_on_idx(idx: int, new_weapon: Weapon) -> void:
-	weapons_hotbar_list.get_child(idx).get_node("SlotImage").texture = new_weapon.icon
+	weapons_hotbar_list.get_child(idx).item = new_weapon

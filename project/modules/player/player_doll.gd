@@ -22,12 +22,12 @@ func _input(event: InputEvent) -> void:
 
 func _update_icons() -> void:
 	if PlayerInventory.equipped_arm:
-		$Arm.get_node("SlotImage").texture = PlayerInventory.equipped_arm.get_2d_texture()
+		$Arm.item = PlayerInventory.equipped_arm
 	if PlayerInventory.equipped_weapon:
-		$Weapon.get_node("SlotImage").texture = PlayerInventory.equipped_weapon.get_2d_texture()
+		$Weapon.item = PlayerInventory.equipped_weapon
 	if PlayerInventory.equipped_head:
-		$Head.get_node("SlotImage").texture = PlayerInventory.equipped_head.get_2d_texture()
+		$Head.item = PlayerInventory.equipped_head
 	if PlayerInventory.equipped_legs:
-		$Legs.get_node("SlotImage").texture = PlayerInventory.equipped_legs.get_2d_texture()
+		$Legs.item = PlayerInventory.equipped_legs
 	if PlayerInventory.equipped_torso:
-		$Torso.get_node("SlotImage").texture = PlayerInventory.equipped_torso.get_2d_texture()
+		$Torso.item = PlayerInventory.equipped_torso

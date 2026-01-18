@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 # health
 @export var max_health := 100
-var health := max_health
+var health: int
 
 # Wander settings
 @export var move_speed := 150.0
@@ -49,6 +49,7 @@ var state := State.WANDER
 ## --- built in methods ---
 
 func _ready():
+	health = max_health
 	spawn_position = global_position
 	prev_pos = global_position
 	pick_new_wander_target()
