@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://dkoc5mebfrp4f"]
 
 [ext_resource type="PackedScene" uid="uid://4ctkx7p3f50k" path="res://components/debug_scene_change_button.tscn" id="1_pdoo8"]
-[ext_resource type="Script" uid="uid://clnar1p6p5eii" path="res://scenes/tower_hub.gd" id="1_wn0jv"]
+[ext_resource type="Script" uid="uid://clnar1p6p5eii" path="res://modules/tower_hub/tower_hub.gd" id="1_wn0jv"]
 [ext_resource type="TileSet" uid="uid://o8taylafv3nk" path="res://modules/level/terrain_tile_set.tres" id="2_6njhd"]
 [ext_resource type="Texture2D" uid="uid://cum3y5bgg7gjx" path="res://assets/tilemap/dark_forest/boulder_3.png" id="3_s40l3"]
 [ext_resource type="PackedScene" uid="uid://h2lk2e0pam0g" path="res://modules/player/player.tscn" id="4_wn0jv"]
