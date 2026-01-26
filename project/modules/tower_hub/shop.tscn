@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgstcvqslgno4"]
+
+[ext_resource type="Script" uid="uid://b50kex1ghextk" path="res://modules/tower_hub/shop.gd" id="1_6lhfy"]
+[ext_resource type="PackedScene" uid="uid://dru8puxo6flwq" path="res://modules/player/player_doll.tscn" id="1_nwxu5"]
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_6lhfy")
+
+[node name="PlayerDoll" parent="." instance=ExtResource("1_nwxu5")]
