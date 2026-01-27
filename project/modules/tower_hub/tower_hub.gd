@@ -13,5 +13,3 @@ func _open_shop() -> void:
 func _open_skyscraper() -> void:
 	$Shop.hide()
 	$SkyScraperUpgrade.show()
-
-	

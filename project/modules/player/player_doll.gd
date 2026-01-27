@@ -19,7 +19,6 @@ func _input(event: InputEvent) -> void:
 		else:
 			show()
 
-
 func _update_icons() -> void:
 	if PlayerInventory.equipped_arm:
 		$Arm.item = PlayerInventory.equipped_arm
@@ -31,3 +30,7 @@ func _update_icons() -> void:
 		$Legs.item = PlayerInventory.equipped_legs
 	if PlayerInventory.equipped_torso:
 		$Torso.item = PlayerInventory.equipped_torso
+	if SceneManager.player_in_hub():
+		$GearsDisplay/Label.text = str(PlayerInventory.skyscraper_gears)
+	else:
+		$GearsDisplay/Label.text = str(PlayerInventory.maze_gears)

@@ -10,8 +10,11 @@ func _ready() -> void:
 # Populate the hotbar with all items in same order
 func populate_hotbar() -> void:
 	var inventory = PlayerInventory.inventory.keys()
-	for idx in min(len(inventory), len(weapons_hotbar_list.get_children())):
-		weapons_hotbar_list.get_child(idx).item = inventory[idx]
+	for idx in len(weapons_hotbar_list.get_children()):
+		if idx < len(inventory):
+			weapons_hotbar_list.get_child(idx).item = inventory[idx]
+		else:
+			weapons_hotbar_list.get_child(idx).item = null
 	select_item(0)
 
 # Hightlight the currentlty selected item by showing a frame around it

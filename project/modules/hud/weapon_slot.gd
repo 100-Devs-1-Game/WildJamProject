@@ -3,15 +3,22 @@ extends Control
 
 @onready var WeaponSlotScene = preload("res://modules/hud/weapon_slot.tscn")
 
+@export var slot_texture: Texture2D
+
 var item: Item:
 	set(new_item):
 		item = new_item
 		if is_node_ready():
-			$SlotImage.texture = item.get_2d_texture()
+			if item:
+				$SlotImage.texture = item.get_2d_texture()
+			else:
+				$SlotImage.texture = null
 
 func _ready() -> void:
 	if item:
 		$SlotImage.texture = item.get_2d_texture()
+	if slot_texture:
+		$SlotImage.texture = slot_texture
 	
 func _get_drag_data(_pos):
 	if not PlayerInventory.can_drag_item(item):
@@ -29,6 +36,7 @@ func _can_drop_data(pos, data):
 	var global_pos = pos + global_position
 	return PlayerInventory.can_drop_item(global_pos, data["item"])
 
-func _drop_data(_pos, data):
-	PlayerInventory.equip_item(data["item"])
-	PlayerInventory.remove_item(data["source_item"], 1)
+func _drop_data(pos, data):
+	var global_pos = pos + global_position
+	PlayerInventory.drop_item(
+		global_pos, data["item"], data["source_item"])

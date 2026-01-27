@@ -55,6 +55,7 @@ legs_slot=""
 head_slot=""
 torso_slot=""
 arm_slot=""
+recycle_slot=""
 
 [gui]
 
