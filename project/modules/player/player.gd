@@ -45,34 +45,12 @@ var target_enemy: Node2D
 func _ready() -> void:
 	bullet_timer.wait_time= shoot_rate
 	_post_ready.call_deferred()
-	_update_player_textures()
-	Signals.inventory_updated.connect(_update_player_textures)
 	
 func _post_ready():
 	# ensure the HUD is fully loaded before setting the initial values
 	Signals.change_ammo_count_value.emit(ammo, max_ammo)
 	Signals.change_health_value.emit(health, max_health)
 
-func _update_player_textures():
-	$Model/Leg.texture = null
-	if PlayerInventory.equipped_legs:
-		$Model/Leg.texture = PlayerInventory.equipped_legs.get_2d_texture()
-	
-	$Model/Torso.texture = null
-	if PlayerInventory.equipped_torso:
-		$Model/Torso.texture = PlayerInventory.equipped_torso.get_2d_texture()
-	
-	$Model/Shoulder/Arm.texture = null
-	if PlayerInventory.equipped_arm:
-		$Model/Shoulder/Arm.texture = PlayerInventory.equipped_arm.get_2d_texture()
-	
-	$Model/Shoulder/Arm/Weapon/Sprite2D.texture = null
-	if PlayerInventory.equipped_weapon:
-		$Model/Shoulder/Arm/Weapon/Sprite2D.texture = PlayerInventory.equipped_weapon.get_2d_texture()
-	
-	$Model/Head.texture = null
-	if PlayerInventory.equipped_head:
-		$Model/Head.texture = PlayerInventory.equipped_head.get_2d_texture()
 
 func _process(_delta: float) -> void:
 	var looking_right := global_position.x < get_global_mouse_position().x

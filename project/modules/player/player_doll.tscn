@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dru8puxo6flwq"]
+[gd_scene load_steps=8 format=3 uid="uid://dru8puxo6flwq"]
 
 [ext_resource type="Script" uid="uid://dscxkjc42rhx7" path="res://modules/player/player_doll.gd" id="1_kt1ex"]
-[ext_resource type="StyleBox" uid="uid://dc7xhnn4v2y3" path="res://modules/hud/panel_style.tres" id="2_iuwr6"]
+[ext_resource type="Texture2D" uid="uid://drucbkedjkae2" path="res://assets/ui/inventoryslotitembg.png" id="2_ljk18"]
 [ext_resource type="PackedScene" uid="uid://bj8pthsq0pi4w" path="res://modules/player/player_model.tscn" id="3_iuwr6"]
 [ext_resource type="PackedScene" uid="uid://dxom55xj78atn" path="res://modules/hud/weapon_slot.tscn" id="3_qjnmt"]
+[ext_resource type="Texture2D" uid="uid://bm3lffivg4yul" path="res://assets_external/flaticon/recycle_roundicons.png" id="5_ljk18"]
+[ext_resource type="Texture2D" uid="uid://bqtm20wrivj0q" path="res://assets_external/flaticon/gear_freepik.png" id="6_jva5n"]
+[ext_resource type="FontFile" uid="uid://d0r500qnwi5wn" path="res://assets_external/Lacquer-Regular.ttf" id="7_svnnl"]
 
 [node name="PlayerDoll" type="Node2D"]
 script = ExtResource("1_kt1ex")
 metadata/_custom_type_script = "uid://dscxkjc42rhx7"
 
-[node name="BackPanel" type="Panel" parent="."]
+[node name="BackPanel" type="NinePatchRect" parent="."]
 anchors_preset = -1
 anchor_left = -0.032
 anchor_top = 0.021000002
@@ -19,9 +22,11 @@ offset_left = 64.0
 offset_top = 64.0
 offset_right = 640.0
 offset_bottom = 768.0
-theme_override_styles/panel = ExtResource("2_iuwr6")
+texture = ExtResource("2_ljk18")
 
 [node name="Model" parent="." instance=ExtResource("3_iuwr6")]
+position = Vector2(320, 384)
+scale = Vector2(6, 6)
 
 [node name="Generate" type="Button" parent="."]
 offset_right = 260.0
@@ -57,5 +62,29 @@ offset_left = 128.0
 offset_top = 384.0
 offset_right = 192.0
 offset_bottom = 448.0
+
+[node name="Recycle" parent="." groups=["recycle_slot"] instance=ExtResource("3_qjnmt")]
+offset_left = 384.0
+offset_top = 640.0
+offset_right = 448.0
+offset_bottom = 704.0
+slot_texture = ExtResource("5_ljk18")
+
+[node name="GearsDisplay" type="HBoxContainer" parent="."]
+offset_left = 448.0
+offset_top = 128.0
+offset_right = 576.0
+offset_bottom = 192.0
+
+[node name="Icon" type="TextureRect" parent="GearsDisplay"]
+layout_mode = 2
+texture = ExtResource("6_jva5n")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GearsDisplay"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_svnnl")
+theme_override_font_sizes/font_size = 50
+text = "0"
 
 [connection signal="pressed" from="Generate" to="." method="_on_generate_pressed"]

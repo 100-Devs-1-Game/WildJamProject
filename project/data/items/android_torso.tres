@@ -12,6 +12,7 @@ script = ExtResource("1_gxak5")
 type = 2
 name = "Android Torso"
 flavor = "Factory Grade"
+recycle_value = 5
 icon = SubResource("AtlasTexture_5td40")
 icon_variants = 10
 icon_variants_x = 10

@@ -12,6 +12,7 @@ script = ExtResource("1_ck3dl")
 type = 3
 name = "Android Head"
 flavor = "Central processing"
+recycle_value = 5
 icon = SubResource("AtlasTexture_muex4")
 icon_variants = 4
 icon_variants_x = 4

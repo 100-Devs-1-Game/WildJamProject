@@ -11,6 +11,7 @@ region = Rect2(0, 0, 15, 12)
 script = ExtResource("2_7j0qn")
 name = "Android Legs"
 flavor = "Fabricator Quality"
+recycle_value = 5
 icon = SubResource("AtlasTexture_p281a")
 icon_variants = 7
 icon_variants_x = 1

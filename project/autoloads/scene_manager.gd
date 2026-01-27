@@ -1,7 +1,7 @@
 extends Node
 
 ## --- public vars ---
-var current_scene: Node = null
+var current_scene: PackedScene = null
 
 ## --- export vars ---
 @export var main_menu_scene: PackedScene
@@ -23,19 +23,15 @@ func _process(_delta: float) -> void:
 
 ## Changes the room
 func change_room(scene: PackedScene) -> void:
-	# Remove current room
-	#if current_scene and is_instance_valid(current_scene):
-		#current_scene.queue_free()
-		#
-	## Load new room
-	#current_scene = scene.instantiate()
-	#add_child(current_scene)
-	
+	current_scene = scene
 	get_tree().change_scene_to_packed.call_deferred(scene)
 	
 	# Send signal
 	Signals.scene_change.emit()
 
+func player_in_hub() -> bool:
+	return current_scene == hub_scene
+	
 ## Loads game scene
 func load_game_scene():
 	change_room(game_scene)

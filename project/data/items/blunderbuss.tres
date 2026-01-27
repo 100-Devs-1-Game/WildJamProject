@@ -12,6 +12,7 @@ script = ExtResource("1_i0wum")
 type = 1
 name = "Blunderbuss"
 flavor = "Goes boom boom"
+recycle_value = 5
 icon = SubResource("AtlasTexture_om2kc")
 icon_variants = 3
 icon_variants_x = 1

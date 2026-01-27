@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj8pthsq0pi4w"]
+[gd_scene load_steps=9 format=3 uid="uid://bj8pthsq0pi4w"]
+
+[ext_resource type="Script" uid="uid://cgwcrhbtleex5" path="res://modules/player/player_model.gd" id="1_s8s8k"]
 
 [sub_resource type="Animation" id="Animation_w2fbi"]
 length = 0.001
@@ -132,6 +134,7 @@ _data = {
 
 [node name="Model" type="Node2D"]
 scale = Vector2(2, 2)
+script = ExtResource("1_s8s8k")
 
 [node name="Leg" type="Sprite2D" parent="."]
 texture_filter = 1

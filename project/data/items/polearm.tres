@@ -11,6 +11,7 @@ region = Rect2(0, 0, 48, 14)
 script = ExtResource("2_wyvwt")
 name = "Polearm"
 flavor = "Stay away from me!"
+recycle_value = 5
 icon = SubResource("AtlasTexture_om2kc")
 icon_variants = 3
 icon_variants_x = 1

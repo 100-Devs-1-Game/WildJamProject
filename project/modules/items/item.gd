@@ -3,6 +3,7 @@ extends Resource
 
 @export var name: String
 @export var flavor: String
+@export var recycle_value: int
 
 @export var icon: AtlasTexture
 @export var icon_variants: int

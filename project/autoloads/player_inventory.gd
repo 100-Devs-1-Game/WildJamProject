@@ -27,6 +27,8 @@ var equipped_torso: Upgrade
 var equipped_legs: Upgrade
 var equipped_arm: Upgrade
 var equipped_weapon: Weapon
+var skyscraper_gears: int
+var maze_gears: int
 
 
 func _ready() -> void:
@@ -34,7 +36,6 @@ func _ready() -> void:
 	for item_scenes in item_library.values():
 		for item_scene in item_scenes:
 			flattened_item_library.append(load(item_scene))
-	print(flattened_item_library)
 
 func generate_new_android_inventory() -> void:
 	equipped_head = load(item_library["heads"].pick_random()).duplicate()
@@ -59,7 +60,6 @@ func add_item(item: Item, count: int) -> void:
 		inventory[item] += count
 	else:
 		inventory[item] = count
-	prints("The player picked up the item with name:", item.name, "the player now has:", inventory)
 	Signals.inventory_updated.emit()
 
 
@@ -78,22 +78,37 @@ func can_drop_item(pos: Vector2, item: Item):
 	for slot in inventory_slots:
 		if slot.get_global_rect().has_point(pos):
 			return false
-	var weapon_slot =  get_tree().get_nodes_in_group("weapon_slot")[0]
+	var recycle_slot = get_tree().get_first_node_in_group("recycle_slot")
+	if recycle_slot.get_global_rect().has_point(pos):
+		return true
+	var weapon_slot =  get_tree().get_first_node_in_group("weapon_slot")
 	if item is Weapon and weapon_slot.get_global_rect().has_point(pos):
 		return true
 	if item is Upgrade:
 		var slot
 		match item.type:
 			Upgrade.Type.LEGS:
-				slot =  get_tree().get_nodes_in_group("legs_slot")[0]
+				slot =  get_tree().get_first_node_in_group("legs_slot")
 			Upgrade.Type.ARMS:
-				slot =  get_tree().get_nodes_in_group("arm_slot")[0]
+				slot =  get_tree().get_first_node_in_group("arm_slot")
 			Upgrade.Type.HEAD:
-				slot =  get_tree().get_nodes_in_group("head_slot")[0]
+				slot =  get_tree().get_first_node_in_group("head_slot")
 			Upgrade.Type.TORSO:
-				slot =  get_tree().get_nodes_in_group("torso_slot")[0]
+				slot =  get_tree().get_first_node_in_group("torso_slot")
 		return slot.get_global_rect().has_point(pos)
 	return false
+
+func drop_item(pos: Vector2, dropped_item: Item, original_item: Item):
+	var recycle_slot = get_tree().get_first_node_in_group("recycle_slot")
+	if recycle_slot.get_global_rect().has_point(pos):
+		if SceneManager.player_in_hub():
+			skyscraper_gears += dropped_item.recycle_value
+		else:
+			maze_gears += dropped_item.recycle_value
+	else:
+		equip_item(dropped_item)
+	remove_item(original_item, 1)
+	Signals.inventory_updated.emit()
 
 func equip_item(item: Item) -> void:
 	if item is Weapon:
@@ -110,7 +125,6 @@ func equip_item(item: Item) -> void:
 				equipped_torso = item
 			Weapon.Type:
 				equipped_weapon = item
-	Signals.inventory_updated.emit()
 			
 
 	
